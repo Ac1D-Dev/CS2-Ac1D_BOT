@@ -1,6 +1,7 @@
 import requests
 import os
 import discord
+import datetime
 
 from discord.ext import commands
 from dotenv import load_dotenv
@@ -33,6 +34,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         api_data = {"Authorization": "Bearer " + FACEIT_KEY }
         reponse = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_data)
         player_info = reponse.json()
+        print(player_info)
 
         player_id = player_info["player_id"]
         
@@ -50,12 +52,15 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
 
 
         embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color=discord.Color.green())
+        embed.set_thumbnail(url="")
         embed.add_field(name= "​​Level", value= level, inline=True)
         embed.add_field(name= "Elo", value= elo, inline=True)
         embed.add_field(name= "Matches", value= matchs, inline=True)
         embed.add_field(name= "WinRate %", value= winrate, inline=True)
         embed.add_field(name= "​Avg K/D", value= avgkd, inline=True)
         embed.add_field(name= "ADR", value= adr, inline=True)
+        embed.add_footer(text= "Stats Cs2 Tracker Bot")
+        embed.timestamp = datetime.datetime.now()
         await interaction.response.send_message(embed=embed)
     except KeyError:
         embed = discord.Embed(title= "- UNKOWN PLAYER -", color=discord.Color.red())
