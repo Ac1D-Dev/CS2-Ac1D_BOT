@@ -22,4 +22,4 @@ async def on_ready():
 async def ping(ctx):
     await ctx.send("Connecté au Serveur !")
 
-bot.run(TOKEN, log_level=logging.DEBUG) 
+bot.run(TOKEN, log_level=logging.DEBUG)
