@@ -37,6 +37,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         print(player_info)
 
         player_id = player_info["player_id"]
+        player_avatar = player_info["avatar"]
         
         api_data_2 = {"Authorization": "Bearer " + FACEIT_KEY }
         player_stats = requests.get(f"https://open.faceit.com/data/v4/players/{player_id}/stats/cs2", headers=api_data_2)
@@ -50,9 +51,8 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         avgkd = info_stats["lifetime"]["Average K/D Ratio"]
         adr = info_stats["lifetime"]["ADR"]
 
-
         embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color=discord.Color.green())
-        embed.set_thumbnail(url="")
+        embed.set_thumbnail(url=player_avatar)
         embed.add_field(name= "​​Level", value= level, inline=True)
         embed.add_field(name= "Elo", value= elo, inline=True)
         embed.add_field(name= "Matches", value= matchs, inline=True)
