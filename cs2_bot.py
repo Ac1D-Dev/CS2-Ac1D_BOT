@@ -26,11 +26,18 @@ async def ping(ctx):
 
 @bot.command()
 async def faceit(ctx, pseudo):
+
     data = {"Authorization": "Bearer " + FACEIT_KEY }
     reponse = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=data)
     donnee = reponse.json()
+
     level = donnee["games"]["cs2"]["skill_level"]
     elo = donnee["games"]["cs2"]["faceit_elo"]
-    await ctx.send(f"Player {pseudo} has been found.\nStats :\nLevel : {level}\nElo : {elo} ")
+
+    embed = discord.Embed(title= "- FaceIt Stats {pseudo} -", color=discord.Color.green())
+    embed.add_field(name= "Level", value= level, inline=True)
+    embed.add_field(name= "Elo", value= elo, inline=True)
+
+    await ctx.send(embed=embed)
 
 bot.run(TOKEN)
