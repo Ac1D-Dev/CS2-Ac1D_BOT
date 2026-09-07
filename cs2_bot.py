@@ -1,17 +1,20 @@
+# Imports
 import requests
 import os
 import discord
 import datetime
 
+# Imports spécifiques
 from discord.ext import commands
 from dotenv import load_dotenv
 
 
-
+#ouverture .env
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 FACEIT_KEY= os.getenv("FACEIT_API_KEY")
 
+# Dictionnaires couleur par niveau faceit (1 -> 10) (Gris -> Rouge) 
 color_per_level = {
     1: discord.Color.greyple(),
     2: discord.Color.green(), 3: discord.Color.green(),
@@ -40,8 +43,8 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
     try:
 
         api_data = {"Authorization": "Bearer " + FACEIT_KEY }
-        reponse = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_data)
-        player_info = reponse.json()
+        player_pseudo = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_data)
+        player_info = player_pseudo.json()
         #print(player_info)
 
         player_id = player_info["player_id"]
@@ -50,23 +53,33 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         api_data_2 = {"Authorization": "Bearer " + FACEIT_KEY }
         player_stats = requests.get(f"https://open.faceit.com/data/v4/players/{player_id}/stats/cs2", headers=api_data_2)
         info_stats = player_stats.json()
-
+        print(info_stats)
 
         level = player_info["games"]["cs2"]["skill_level"]
         elo = player_info["games"]["cs2"]["faceit_elo"]
+
+
         matchs = info_stats["lifetime"]["Matches"]
         winrate = info_stats["lifetime"]["Win Rate %"]
         avgkd = info_stats["lifetime"]["Average K/D Ratio"]
         adr = info_stats["lifetime"]["ADR"]
+        hsavg = info_stats["lifetime"]["Average Headshot %"]
+        wins = info_stats["lifetime"]["Wins"]
+        cwinstreak = info_stats["lifetime"]["Current Win Streak"]
+        lwinstreak = info_stats["lifetime"]["Longest Win Streak"]
 
         embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color= color_per_level[level])
         embed.set_thumbnail(url=avatar)
         embed.add_field(name= "​​Level", value= level, inline=True)
         embed.add_field(name= "Elo", value= elo, inline=True)
         embed.add_field(name= "Matches", value= matchs, inline=True)
+        embed.add_field(name= "Wins", value= wins, inline=True)
         embed.add_field(name= "WinRate %", value= winrate, inline=True)
         embed.add_field(name= "​Avg K/D", value= avgkd, inline=True)
+        embed.add_field(name= "Average Headshot %", value= hsavg, inline=True)
         embed.add_field(name= "ADR", value= adr, inline=True)
+        embed.add_field(name= "Current Win Streak", value= cwinstreak, inline=True)
+        embed.add_field(name= "Longest Win Streak", value= lwinstreak, inline=True)
         embed.set_footer(text= "Ac1D - TrackerBot")
         embed.timestamp = datetime.datetime.now()
         await interaction.response.send_message(embed=embed)
