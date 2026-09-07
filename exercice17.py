@@ -2,6 +2,9 @@ import discord
 from discord.ext import commands
 import os
 from dotenv import load_dotenv
+import logging
+logging.getLogger("discord.http").setLevel(logging.DEBUG)
+
 
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
@@ -12,7 +15,7 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-@bot.event
+@bot.event()
 async def on_ready():
     print(f"Connecté en tant que {bot.user}")
 
