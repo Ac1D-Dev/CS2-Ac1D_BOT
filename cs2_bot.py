@@ -48,11 +48,11 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
 
 
         embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color=discord.Color.green())
-        embed.add_field(name= "​📒"+"​​ Level", value= level, inline=True)
-        embed.add_field(name= "📈"+" Elo", value= elo, inline=True)
-        embed.add_field(name= "👑"+" Matches", value= matchs, inline=True)
-        embed.add_field(name= "📉"+" Win Rate %", value= winrate, inline=True)
-        embed.add_field(name= "🏹"+"​ Avg K/D", value= avgkd, inline=True)
+        embed.add_field(name= "​📒"+"​​  Level", value= level, inline=True)
+        embed.add_field(name= "📈"+"  Elo", value= elo, inline=True)
+        embed.add_field(name= "👑"+"  Matches", value= matchs, inline=True)
+        embed.add_field(name= "📉"+"  Win Rate %", value= winrate, inline=True)
+        embed.add_field(name= "🏹"+" ​ Avg K/D", value= avgkd, inline=True)
         #embed.add_field(name= "Rating", value= rating, inline=True)
         await interaction.response.send_message(embed=embed)
 
