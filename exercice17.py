@@ -3,7 +3,6 @@ from discord.ext import commands
 import os
 from dotenv import load_dotenv
 import logging
-logging.getLogger("discord.http").setLevel(logging.DEBUG)
 
 
 load_dotenv()
@@ -23,4 +22,4 @@ async def on_ready():
 async def ping(ctx):
     await ctx.send("Connecté au Serveur !")
 
-bot.run(TOKEN) 
+bot.run(TOKEN, log_level=logging.DEBUG) 
