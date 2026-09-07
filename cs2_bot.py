@@ -28,16 +28,19 @@ async def ping(interaction: discord.Interaction):
 @bot.tree.command(name="faceit", description="Display player FaceIt stats")
 async def faceit(interaction: discord.Interaction, pseudo: str):
 
-    api_data = {"Authorization": "Bearer " + FACEIT_KEY }
-    reponse = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_data)
-    player_info = reponse.json()
-
-    api_data_2 = {"Authorization": "Bearer " + FACEIT_KEY }
-    player_stats = requests.get(f"https://open.faceit.com/data/v4/players/{player_id}/stats/cs2", headers=api_data_2)
-    info_stats = player_stats.json()
-
     try:
+
+        api_data = {"Authorization": "Bearer " + FACEIT_KEY }
+        reponse = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_data)
+        player_info = reponse.json()
+
         player_id = player_info["player_id"]
+        
+        api_data_2 = {"Authorization": "Bearer " + FACEIT_KEY }
+        player_stats = requests.get(f"https://open.faceit.com/data/v4/players/{player_id}/stats/cs2", headers=api_data_2)
+        info_stats = player_stats.json()
+
+
         level = player_info["games"]["cs2"]["skill_level"]
         elo = player_info["games"]["cs2"]["faceit_elo"]
         matchs = info_stats["lifetime"]["Matches"]
