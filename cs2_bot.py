@@ -23,7 +23,7 @@ async def on_ready():
 
 @bot.tree.command()
 async def ping(interaction: discord.Interaction):
-    await interaction.response.send_message("Connection Established !")
+    await interaction.response.send_message(f"Connection Established {bot.user} !")
 
 @bot.command()
 async def faceit(ctx, pseudo):
