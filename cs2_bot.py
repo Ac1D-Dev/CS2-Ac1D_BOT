@@ -33,11 +33,11 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
     player_info = reponse.json()
 
     api_data_2 = {"Authorization": "Bearer " + FACEIT_KEY }
-    player_id = player_info["player_id"]
     player_stats = requests.get(f"https://open.faceit.com/data/v4/players/{player_id}/stats/cs2", headers=api_data_2)
     info_stats = player_stats.json()
 
     try:
+        player_id = player_info["player_id"]
         level = player_info["games"]["cs2"]["skill_level"]
         elo = player_info["games"]["cs2"]["faceit_elo"]
         matchs = info_stats["lifetime"]["Matches"]
@@ -54,7 +54,6 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         embed.add_field(name= "​Avg K/D", value= avgkd, inline=True)
         embed.add_field(name= "ADR", value= adr, inline=True)
         await interaction.response.send_message(embed=embed)
-
     except KeyError:
         embed = discord.Embed(title= "- UNKOWN PLAYER -", color=discord.Color.red())
         embed.add_field(name= f"{pseudo}",value= "is not a valid pseudo", inline=True)
