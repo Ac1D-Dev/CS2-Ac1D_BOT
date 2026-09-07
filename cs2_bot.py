@@ -25,8 +25,8 @@ async def on_ready():
 async def ping(interaction: discord.Interaction):
     await interaction.response.send_message(f"Connection Established {bot.user} !")
 
-@bot.command()
-async def faceit(ctx, pseudo):
+@bot.tree.command()
+async def faceit(interaction: discord.Interaction, pseudo: str):
 
     data = {"Authorization": "Bearer " + FACEIT_KEY }
     reponse = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=data)
@@ -38,11 +38,11 @@ async def faceit(ctx, pseudo):
         embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color=discord.Color.green())
         embed.add_field(name= "Level", value= level, inline=True)
         embed.add_field(name= "Elo", value= elo, inline=True)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
 
     except KeyError:
         embed = discord.Embed(title= "- UNKOWN PLAYER -", color=discord.Color.red())
         embed.add_field(name= f"{pseudo}",value= "is not a valid pseudo", inline=True)
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
 
 bot.run(TOKEN)
