@@ -43,7 +43,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         matchs = info_stats["lifetime"]["Matches"]
         winrate = info_stats["lifetime"]["Win Rate %"]
         avgkd = info_stats["lifetime"]["Average K/D Ratio"]
-        adr = info_stats[""][""][""]
+        adr = info_stats["lifetime"]["ADR"]
 
 
         embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color=discord.Color.green())
