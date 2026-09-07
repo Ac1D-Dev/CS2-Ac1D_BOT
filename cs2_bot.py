@@ -28,6 +28,7 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+
 @bot.event
 async def on_ready():
     await bot.tree.sync()
@@ -45,7 +46,6 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         api_data = {"Authorization": "Bearer " + FACEIT_KEY }
         player_pseudo = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_data)
         player_info = player_pseudo.json()
-        
 
         player_id = player_info["player_id"]
         avatar = player_info["avatar"]
@@ -53,7 +53,6 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         api_data_2 = {"Authorization": "Bearer " + FACEIT_KEY }
         player_stats = requests.get(f"https://open.faceit.com/data/v4/players/{player_id}/stats/cs2", headers=api_data_2)
         info_stats = player_stats.json()
-        print(info_stats)
 
         level = player_info["games"]["cs2"]["skill_level"]
         elo = player_info["games"]["cs2"]["faceit_elo"]
@@ -80,13 +79,13 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         embed.add_field(name= "ADR", value= adr, inline=True)
         embed.add_field(name= "Current Win Streak", value= cwinstreak, inline=True)
         embed.add_field(name= "Longest Win Streak", value= lwinstreak, inline=True)
-        embed.set_footer(text= "Ac1D - TrackerBot")
+        embed.set_footer(text= f"Ac1D - TrackerBot" + bot.latency)
         embed.timestamp = datetime.datetime.now()
         await interaction.response.send_message(embed=embed)
 
     except KeyError:
 
-        embed = discord.Embed(title= "-​❓ UNKOWN PLAYER ​❓-", color=color_per_level[1])
+        embed = discord.Embed(title= "- UNKNOWN PLAYER -", color=color_per_level[1])
         embed.add_field(name= f"​❓{pseudo}​❓",value= "is not a valid pseudo", inline=True)
         await interaction.response.send_message(embed=embed)
 
