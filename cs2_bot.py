@@ -67,6 +67,9 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         cwinstreak = info_stats["lifetime"]["Current Win Streak"]
         lwinstreak = info_stats["lifetime"]["Longest Win Streak"]
 
+        latency = bot.latency * 1000
+        ms = round(latency, 2)
+
         embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color= color_per_level[level])
         embed.set_thumbnail(url=avatar)
         embed.add_field(name= "​​Level", value= level, inline=True)
@@ -79,7 +82,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         embed.add_field(name= "ADR", value= adr, inline=True)
         embed.add_field(name= "Current Win Streak", value= cwinstreak, inline=True)
         embed.add_field(name= "Longest Win Streak", value= lwinstreak, inline=True)
-        embed.set_footer(text= f"Ac1D - TrackerBot" + bot.latency)
+        embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |          ~ {ms} ms")
         embed.timestamp = datetime.datetime.now()
         await interaction.response.send_message(embed=embed)
 
