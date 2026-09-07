@@ -21,11 +21,11 @@ async def on_ready():
     await bot.tree.sync()
     print(f"Connect as {bot.user}")
 
-@bot.tree.command()
+@bot.tree.command(name="ping", description="Detection Test for development")
 async def ping(interaction: discord.Interaction):
     await interaction.response.send_message(f"Connection Established {bot.user} !")
 
-@bot.tree.command()
+@bot.tree.command(name="faceit", description="Display player FaceIt stats")
 async def faceit(interaction: discord.Interaction, pseudo: str):
 
     data = {"Authorization": "Bearer " + FACEIT_KEY }
