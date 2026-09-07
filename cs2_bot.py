@@ -26,7 +26,7 @@ async def ping(ctx):
 
 @bot.command()
 async def faceit(ctx, pseudo):
-    data = {"Authorization": "Bearer" + " " + FACEIT_KEY }
+    data = {"Authorization": "Bearer " + FACEIT_KEY }
     reponse = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=data)
     donnee = reponse.json()
     level = donnee["games"]["cs2"]["skill_level"]
