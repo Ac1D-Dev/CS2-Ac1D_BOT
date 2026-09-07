@@ -34,7 +34,7 @@ async def faceit(ctx, pseudo):
     level = donnee["games"]["cs2"]["skill_level"]
     elo = donnee["games"]["cs2"]["faceit_elo"]
 
-    embed = discord.Embed(title= "- FaceIt Stats {pseudo} -", color=discord.Color.green())
+    embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color=discord.Color.green())
     embed.add_field(name= "Level", value= level, inline=True)
     embed.add_field(name= "Elo", value= elo, inline=True)
 
