@@ -37,7 +37,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         #print(player_info)
 
         player_id = player_info["player_id"]
-        player_avatar = player_info["avatar"]
+        avatar = player_info["avatar"]
         
         api_data_2 = {"Authorization": "Bearer " + FACEIT_KEY }
         player_stats = requests.get(f"https://open.faceit.com/data/v4/players/{player_id}/stats/cs2", headers=api_data_2)
@@ -52,7 +52,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         adr = info_stats["lifetime"]["ADR"]
 
         embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color=discord.Color.green())
-        embed.set_thumbnail(url=player_avatar)
+        embed.set_thumbnail(url=avatar)
         embed.add_field(name= "​​Level", value= level, inline=True)
         embed.add_field(name= "Elo", value= elo, inline=True)
         embed.add_field(name= "Matches", value= matchs, inline=True)
@@ -62,7 +62,9 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         embed.set_footer(text= "Ac1D - Tracker_Bot")
         embed.timestamp = datetime.datetime.now()
         await interaction.response.send_message(embed=embed)
+
     except KeyError:
+
         embed = discord.Embed(title= "- UNKOWN PLAYER -", color=discord.Color.red())
         embed.add_field(name= f"{pseudo}",value= "is not a valid pseudo", inline=True)
         await interaction.response.send_message(embed=embed)
