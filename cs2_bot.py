@@ -34,7 +34,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         api_data = {"Authorization": "Bearer " + FACEIT_KEY }
         reponse = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_data)
         player_info = reponse.json()
-        print(player_info)
+        #print(player_info)
 
         player_id = player_info["player_id"]
         player_avatar = player_info["avatar"]
