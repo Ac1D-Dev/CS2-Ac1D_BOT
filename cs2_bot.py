@@ -31,6 +31,6 @@ async def faceit(ctx, pseudo):
     donnee = reponse.json()
     level = donnee["games"]["cs2"]["skill_level"]
     elo = donnee["games"]["cs2"]["faceit_elo"]
-    await ctx.send(f"Player {pseudo} has been found. Stats :\nLevel : {level}\nElo : {elo} ")
+    await ctx.send(f"Player {pseudo} has been found.\nStats :\nLevel : {level}\nElo : {elo} ")
 
 bot.run(TOKEN)
