@@ -82,8 +82,8 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         embed.add_field(name= "ADR", value= adr, inline=True)
         embed.add_field(name= "Current Win Streak", value= cwinstreak, inline=True)
         embed.add_field(name= "Longest Win Streak", value= lwinstreak, inline=True)
-        embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |          ~ {ms} ms")
         embed.timestamp = datetime.datetime.now()
+        embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {ms} ms")
         await interaction.response.send_message(embed=embed)
 
     except KeyError:
