@@ -12,6 +12,14 @@ load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 FACEIT_KEY= os.getenv("FACEIT_API_KEY")
 
+color_per_level = {
+    1: discord.Color.greyple(),
+    2: discord.Color.green(), 3: discord.Color.green(),
+    4: discord.Color.yellow(), 5: discord.Color.yellow(), 6: discord.Color.yellow(), 7: discord.Color.yellow(),
+    8: discord.Color.orange(), 9: discord.Color.orange(),
+    10: discord.Color.red()
+    }
+
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -51,7 +59,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         avgkd = info_stats["lifetime"]["Average K/D Ratio"]
         adr = info_stats["lifetime"]["ADR"]
 
-        embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color=discord.Color.green())
+        embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color= color_per_level[level])
         embed.set_thumbnail(url=avatar)
         embed.add_field(name= "​​Level", value= level, inline=True)
         embed.add_field(name= "Elo", value= elo, inline=True)
@@ -65,7 +73,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
 
     except KeyError:
 
-        embed = discord.Embed(title= "- UNKOWN PLAYER -", color=discord.Color.red())
+        embed = discord.Embed(title= "- UNKOWN PLAYER -", color=color_per_level[1])
         embed.add_field(name= f"{pseudo}",value= "is not a valid pseudo", inline=True)
         await interaction.response.send_message(embed=embed)
 
