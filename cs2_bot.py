@@ -59,7 +59,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         embed.add_field(name= "WinRate %", value= winrate, inline=True)
         embed.add_field(name= "​Avg K/D", value= avgkd, inline=True)
         embed.add_field(name= "ADR", value= adr, inline=True)
-        embed.set_footer(text= "Stats Cs2 Tracker Bot")
+        embed.set_footer(text= "Ac1D - Tracker_Bot")
         embed.timestamp = datetime.datetime.now()
         await interaction.response.send_message(embed=embed)
     except KeyError:
