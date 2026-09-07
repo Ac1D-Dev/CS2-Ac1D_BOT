@@ -28,16 +28,32 @@ async def ping(interaction: discord.Interaction):
 @bot.tree.command(name="faceit", description="Display player FaceIt stats")
 async def faceit(interaction: discord.Interaction, pseudo: str):
 
-    data = {"Authorization": "Bearer " + FACEIT_KEY }
-    reponse = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=data)
-    donnee = reponse.json()
+    api_data = {"Authorization": "Bearer " + FACEIT_KEY }
+    reponse = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_data)
+    player_info = reponse.json()
+
+    api_data_2 = {"Authorization": "Bearer " + FACEIT_KEY }
+    player_id = player_info["player_id"]
+    player_stats = requests.get(f"https://open.faceit.com/data/v4/players/{player_id}/stats/cs2", headers=api_data_2)
+    info_stats = player_stats.json()
+    print(info_stats)
+
     try:
-        level = donnee["games"]["cs2"]["skill_level"]
-        elo = donnee["games"]["cs2"]["faceit_elo"]
+        level = player_info["games"]["cs2"]["skill_level"]
+        elo = player_info["games"]["cs2"]["faceit_elo"]
+        matchs = info_stats["lifetime"]["Matches"]
+        winrate = info_stats["lifetime"]["Win Rate %"]
+        avgkd = info_stats["lifetime"]["Average K/D Ratio"]
+        #rating = info_stats[""][""][""]
+
 
         embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color=discord.Color.green())
         embed.add_field(name= "Level", value= level, inline=True)
         embed.add_field(name= "Elo", value= elo, inline=True)
+        embed.add_field(name= "Matches", value= matchs, inline=True)
+        embed.add_field(name= "Win Rate %", value= winrate, inline=True)
+        embed.add_field(name= "Avg K/D", value= avgkd, inline=True)
+        #embed.add_field(name= "Rating", value= rating, inline=True)
         await interaction.response.send_message(embed=embed)
 
     except KeyError:
