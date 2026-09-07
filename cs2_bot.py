@@ -40,7 +40,7 @@ async def faceit(ctx, pseudo):
         await ctx.send(embed=embed)
 
     except KeyError:
-        embed = discord.Embed(title= "UNKOWN PLAYER", color=discord.Color.red())
+        embed = discord.Embed(title= "- UNKOWN PLAYER -", color=discord.Color.red())
         embed.add_field(name= f"{pseudo}",value= "is not a valid pseudo", inline=True)
         await ctx.send(embed=embed)
 
