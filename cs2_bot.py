@@ -36,7 +36,6 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
     player_id = player_info["player_id"]
     player_stats = requests.get(f"https://open.faceit.com/data/v4/players/{player_id}/stats/cs2", headers=api_data_2)
     info_stats = player_stats.json()
-    print(info_stats)
 
     try:
         level = player_info["games"]["cs2"]["skill_level"]
@@ -44,16 +43,16 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         matchs = info_stats["lifetime"]["Matches"]
         winrate = info_stats["lifetime"]["Win Rate %"]
         avgkd = info_stats["lifetime"]["Average K/D Ratio"]
-        #rating = info_stats[""][""][""]
+        adr = info_stats[""][""][""]
 
 
         embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color=discord.Color.green())
-        embed.add_field(name= "​📒"+"​​  Level", value= level, inline=True)
-        embed.add_field(name= "📈"+"  Elo", value= elo, inline=True)
-        embed.add_field(name= "👑"+"  Matches", value= matchs, inline=True)
-        embed.add_field(name= "📉"+"  Win Rate %", value= winrate, inline=True)
-        embed.add_field(name= "🏹"+" ​ Avg K/D", value= avgkd, inline=True)
-        #embed.add_field(name= "Rating", value= rating, inline=True)
+        embed.add_field(name= "​​Level", value= level, inline=True)
+        embed.add_field(name= "Elo", value= elo, inline=True)
+        embed.add_field(name= "Matches", value= matchs, inline=True)
+        embed.add_field(name= "Win Rate %", value= winrate, inline=True)
+        embed.add_field(name= "​Avg K/D", value= avgkd, inline=True)
+        embed.add_field(name= "ADR", value= adr, inline=True)
         await interaction.response.send_message(embed=embed)
 
     except KeyError:
