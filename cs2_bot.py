@@ -45,7 +45,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         api_data = {"Authorization": "Bearer " + FACEIT_KEY }
         player_pseudo = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_data)
         player_info = player_pseudo.json()
-        #print(player_info)
+        
 
         player_id = player_info["player_id"]
         avatar = player_info["avatar"]
@@ -63,7 +63,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         winrate = info_stats["lifetime"]["Win Rate %"]
         avgkd = info_stats["lifetime"]["Average K/D Ratio"]
         adr = info_stats["lifetime"]["ADR"]
-        hsavg = info_stats["lifetime"]["Average Headshot %"]
+        hsavg = info_stats["lifetime"]["Average Headshots %"]
         wins = info_stats["lifetime"]["Wins"]
         cwinstreak = info_stats["lifetime"]["Current Win Streak"]
         lwinstreak = info_stats["lifetime"]["Longest Win Streak"]
@@ -73,21 +73,21 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         embed.add_field(name= "​​Level", value= level, inline=True)
         embed.add_field(name= "Elo", value= elo, inline=True)
         embed.add_field(name= "Matches", value= matchs, inline=True)
-        #embed.add_field(name= "Wins", value= wins, inline=True)
+        embed.add_field(name= "Wins", value= wins, inline=True)
         embed.add_field(name= "WinRate %", value= winrate, inline=True)
         embed.add_field(name= "​Avg K/D", value= avgkd, inline=True)
-        #embed.add_field(name= "Average Headshot %", value= hsavg, inline=True)
+        embed.add_field(name= "Average Headshot %", value= hsavg, inline=True)
         embed.add_field(name= "ADR", value= adr, inline=True)
-        #embed.add_field(name= "Current Win Streak", value= cwinstreak, inline=True)
-        #embed.add_field(name= "Longest Win Streak", value= lwinstreak, inline=True)
+        embed.add_field(name= "Current Win Streak", value= cwinstreak, inline=True)
+        embed.add_field(name= "Longest Win Streak", value= lwinstreak, inline=True)
         embed.set_footer(text= "Ac1D - TrackerBot")
         embed.timestamp = datetime.datetime.now()
         await interaction.response.send_message(embed=embed)
 
     except KeyError:
 
-        embed = discord.Embed(title= "- UNKOWN PLAYER -", color=color_per_level[1])
-        embed.add_field(name= f"{pseudo}",value= "is not a valid pseudo", inline=True)
+        embed = discord.Embed(title= "-​❓ UNKOWN PLAYER ​❓-", color=color_per_level[1])
+        embed.add_field(name= f"​❓{pseudo}​❓",value= "is not a valid pseudo", inline=True)
         await interaction.response.send_message(embed=embed)
 
 bot.run(TOKEN)
