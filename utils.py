@@ -62,13 +62,6 @@ class ViewMode(discord.ui.View):
             
             embed.timestamp = datetime.datetime.now()
 
-
-
-
-
-
-
-
         elif select_preset == "Global":
 
             embed = discord.Embed(title=f"Global Stats", color= color_per_level[self.player_infos["level"]])
