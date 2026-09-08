@@ -4,47 +4,21 @@ import os
 import discord
 import datetime
 
+
 # Imports spécifiques
 from discord.ext import commands
 from dotenv import load_dotenv
-
+from utils import color_per_level, ViewMode
 
 #ouverture .env
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 FACEIT_KEY= os.getenv("FACEIT_API_KEY")
 
-# Dictionnaires couleur par niveau faceit (1 -> 10) (Gris -> Rouge) 
-color_per_level = {
-    1: discord.Color.greyple(),
-    2: discord.Color.green(), 3: discord.Color.green(),
-    4: discord.Color.yellow(), 5: discord.Color.yellow(), 6: discord.Color.yellow(), 7: discord.Color.yellow(),
-    8: discord.Color.orange(), 9: discord.Color.orange(),
-    10: discord.Color.red()
-    }
-
 intents = discord.Intents.default()
 intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
-
-class ViewMode(discord.ui.View):
-    def __init__(self, player_infos):
-        super().__init__()
-        self.player_infos = player_infos
-
-    @discord.ui.select(
-        placeholder="Select a Preset",
-        options= [discord.SelectOption(label="Global"),
-                discord.SelectOption(label="Competitive"),
-                discord.SelectOption(label="Performance")]
-    )
-
-    async def preset_select(self, interaction: discord.Interaction, select: discord.ui.Select):
-        select_preset = select.values[0]
-        embed = discord.Embed(title=f"{self.player_infos} select : {select_preset}")
-        await interaction.response.edit_message(embed=embed)
-
 
 @bot.event
 async def on_ready():
@@ -63,7 +37,6 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         api_data = {"Authorization": "Bearer " + FACEIT_KEY }
         player_pseudo = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_data)
         player_infos = player_pseudo.json()
-        print(player_infos)
 
         player_id = player_infos["player_id"]
         avatar = player_infos["avatar"]
@@ -104,7 +77,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
 
         embed.timestamp = datetime.datetime.now()
 
-        my_view = ViewMode(player_infos= player_id)
+        my_view = ViewMode(player_infos= player_stats)
         await interaction.response.send_message(embed=embed, view=my_view)
 
     except KeyError:
