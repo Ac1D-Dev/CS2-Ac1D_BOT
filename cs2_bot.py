@@ -49,7 +49,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         elo = player_infos["games"]["cs2"]["faceit_elo"]
 
 
-        matchs = info_stats["lifetime"]["Matches"]
+        matches = info_stats["lifetime"]["Matches"]
         winrate = info_stats["lifetime"]["Win Rate %"]
         avgkd = info_stats["lifetime"]["Average K/D Ratio"]
         adr = info_stats["lifetime"]["ADR"]
@@ -65,7 +65,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         embed.set_thumbnail(url=avatar)
         embed.add_field(name= "​​Level", value= level, inline=True)
         embed.add_field(name= "Elo", value= elo, inline=True)
-        embed.add_field(name= "Matches", value= matchs, inline=True)
+        embed.add_field(name= "Matches", value= matches, inline=True)
         embed.add_field(name= "Avg K/D", value= avgkd, inline=True)
         embed.add_field(name= "Current Win Streak", value= cwinstreak, inline=True)
         embed.add_field(name= "Wins", value= wins, inline=True)
@@ -77,7 +77,14 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
 
         embed.timestamp = datetime.datetime.now()
 
-        my_view = ViewMode(player_infos= player_stats)
+        stats = {
+            "level": level, "elo": elo, "matches": matches, "avgkd": avgkd,
+            "cwinstreak": cwinstreak, "wins": wins, "hsavg": hsavg, "lwinstreak": lwinstreak,
+            "winrate": winrate, "adr": adr 
+        }
+
+
+        my_view = ViewMode(player_infos= stats)
         await interaction.response.send_message(embed=embed, view=my_view)
 
     except KeyError:

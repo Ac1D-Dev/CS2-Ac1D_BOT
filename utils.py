@@ -18,9 +18,6 @@ color_per_level = {
     }
 
 
-
-
-
 ###################################################################################
 
 
@@ -42,6 +39,36 @@ class ViewMode(discord.ui.View):
     )
 
     async def preset_select(self, interaction: discord.Interaction, select: discord.ui.Select):
+
         select_preset = select.values[0]
-        embed = discord.Embed(title=f"{self.player_infos} select : {select_preset}")
+
+        if select_preset == "Global":
+
+            embed = discord.Embed(title=f"Global Stats")
+            embed.add_field(name="Level", value=self.player_infos["level"], inline=True)
+            embed.add_field(name="Elo", value=self.player_infos["elo"], inline=True)
+            embed.add_field(name="Matches", value=self.player_infos["matches"], inline=True)
+            embed.add_field(name="Wins", value=self.player_infos["wins"], inline=True)
+            embed.add_field(name="Winrate", value=self.player_infos["winrate"], inline=True)
+            
+
+        elif select_preset == "Performance":
+
+            embed = discord.Embed(title=f"Performance Stats")
+            embed.add_field(name="Average K/D", value=self.player_infos["avgkd"], inline=True)
+            embed.add_field(name="ADR", value=self.player_infos["adr"], inline=True)
+            embed.add_field(name="Average Headshot %", value=self.player_infos["hsavg"], inline=True)
+            embed.add_field(name="Winrate", value=self.player_infos["winrate"], inline=True)
+            
+
+        elif select_preset == "Competitive":
+
+            embed = discord.Embed(title=f"Competitive Stats")
+            embed.add_field(name="Average Headshot %", value=self.player_infos["hsavg"], inline=True)
+            embed.add_field(name="Average K/D", value=self.player_infos["avgkd"], inline=True)
+            embed.add_field(name="Wins", value=self.player_infos["wins"], inline=True)
+            embed.add_field(name="Winrate", value=self.player_infos["winrate"], inline=True)
+            embed.add_field(name="Current Win Streak", value=self.player_infos["cwinstreak"], inline=True)
+            embed.add_field(name="Longest Win Streak", value=self.player_infos["lwinstreak"], inline=True)
+            
         await interaction.response.edit_message(embed=embed)
