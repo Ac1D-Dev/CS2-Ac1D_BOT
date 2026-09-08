@@ -78,7 +78,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         embed.timestamp = datetime.datetime.now()
 
         stats = {
-            "level": level, "elo": elo, "matches": matches, "avgkd": avgkd,
+            "avatar": avatar,"level": level, "elo": elo, "matches": matches, "avgkd": avgkd,
             "cwinstreak": cwinstreak, "wins": wins, "hsavg": hsavg, "lwinstreak": lwinstreak,
             "winrate": winrate, "adr": adr 
         }

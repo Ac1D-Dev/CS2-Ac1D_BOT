@@ -45,6 +45,8 @@ class ViewMode(discord.ui.View):
         if select_preset == "Global":
 
             embed = discord.Embed(title=f"Global Stats")
+
+            embed.set_thumbnail(url=self.player_infos["avatar"])
             embed.add_field(name="Level", value=self.player_infos["level"], inline=True)
             embed.add_field(name="Elo", value=self.player_infos["elo"], inline=True)
             embed.add_field(name="Matches", value=self.player_infos["matches"], inline=True)
@@ -55,6 +57,8 @@ class ViewMode(discord.ui.View):
         elif select_preset == "Performance":
 
             embed = discord.Embed(title=f"Performance Stats")
+
+            embed.set_thumbnail(url=self.player_infos["avatar"])
             embed.add_field(name="Average K/D", value=self.player_infos["avgkd"], inline=True)
             embed.add_field(name="ADR", value=self.player_infos["adr"], inline=True)
             embed.add_field(name="Average Headshot %", value=self.player_infos["hsavg"], inline=True)
@@ -64,6 +68,8 @@ class ViewMode(discord.ui.View):
         elif select_preset == "Competitive":
 
             embed = discord.Embed(title=f"Competitive Stats")
+
+            embed.set_thumbnail(url=self.player_infos["avatar"])
             embed.add_field(name="Average Headshot %", value=self.player_infos["hsavg"], inline=True)
             embed.add_field(name="Average K/D", value=self.player_infos["avgkd"], inline=True)
             embed.add_field(name="Wins", value=self.player_infos["wins"], inline=True)
