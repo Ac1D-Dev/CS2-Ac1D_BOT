@@ -28,6 +28,23 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+class ViewMode(discord.ui.View):
+    def __init__(self, player_infos):
+        super().__init__()
+        self.player_infos = player_infos
+
+    @discord.ui.select(
+        placeholder="Select a Preset",
+        options= [discord.SelectOption(label="Global"),
+                discord.SelectOption(label="Competitive"),
+                discord.SelectOption(label="Performance")]
+    )
+
+    async def preset_select(self, interaction: discord.Interaction, select: discord.ui.Select):
+        select_preset = select.values[0]
+        embed = discord.Embed(title=f"{self.player_infos} select : {select_preset}")
+        await interaction.response.edit_message(embed=embed)
+
 
 @bot.event
 async def on_ready():
@@ -45,18 +62,18 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
 
         api_data = {"Authorization": "Bearer " + FACEIT_KEY }
         player_pseudo = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_data)
-        player_info = player_pseudo.json()
-        print(player_info)
+        player_infos = player_pseudo.json()
+        print(player_infos)
 
-        player_id = player_info["player_id"]
-        avatar = player_info["avatar"]
+        player_id = player_infos["player_id"]
+        avatar = player_infos["avatar"]
         
         api_data_2 = {"Authorization": "Bearer " + FACEIT_KEY }
         player_stats = requests.get(f"https://open.faceit.com/data/v4/players/{player_id}/stats/cs2", headers=api_data_2)
         info_stats = player_stats.json()
 
-        level = player_info["games"]["cs2"]["skill_level"]
-        elo = player_info["games"]["cs2"]["faceit_elo"]
+        level = player_infos["games"]["cs2"]["skill_level"]
+        elo = player_infos["games"]["cs2"]["faceit_elo"]
 
 
         matchs = info_stats["lifetime"]["Matches"]
@@ -84,8 +101,11 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         embed.add_field(name= "WinRate %", value= winrate, inline=True)
         embed.add_field(name= "ADR", value= adr, inline=True)
         embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {ms} ms")
+
         embed.timestamp = datetime.datetime.now()
-        await interaction.response.send_message(embed=embed)
+
+        my_view = ViewMode(player_infos= player_id)
+        await interaction.response.send_message(embed=embed, view=my_view)
 
     except KeyError:
 
