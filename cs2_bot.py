@@ -46,6 +46,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         api_data = {"Authorization": "Bearer " + FACEIT_KEY }
         player_pseudo = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_data)
         player_info = player_pseudo.json()
+        print(player_info)
 
         player_id = player_info["player_id"]
         avatar = player_info["avatar"]
@@ -82,14 +83,14 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         embed.add_field(name= "ADR", value= adr, inline=True)
         embed.add_field(name= "Current Win Streak", value= cwinstreak, inline=True)
         embed.add_field(name= "Longest Win Streak", value= lwinstreak, inline=True)
-        embed.timestamp = datetime.datetime.now()
         embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {ms} ms")
+        embed.timestamp = datetime.datetime.now()
         await interaction.response.send_message(embed=embed)
 
     except KeyError:
 
         embed = discord.Embed(title= "- UNKNOWN PLAYER -", color=color_per_level[1])
-        embed.add_field(name= f"​❓{pseudo}​❓",value= "is not a valid pseudo", inline=True)
+        embed.add_field(name= f"​❓{pseudo}​❓",value= " is not a valid pseudo", inline=True)
         await interaction.response.send_message(embed=embed)
 
 bot.run(TOKEN)
