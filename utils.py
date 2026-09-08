@@ -60,9 +60,9 @@ class ViewMode(discord.ui.View):
 
             embed.set_thumbnail(url=self.player_infos["avatar"])
             embed.add_field(name="Average K/D", value=self.player_infos["avgkd"], inline=True)
-            embed.add_field(name="Average Headshot %", value=self.player_infos["hsavg"], inline=True)
-            embed.add_field(name="\nADR", value=self.player_infos["adr"], inline=True)
             embed.add_field(name="Winrate", value=self.player_infos["winrate"], inline=True)
+            embed.add_field(name="Average Headshot %", value=self.player_infos["hsavg"], inline=True)
+            embed.add_field(name="ADR", value=self.player_infos["adr"], inline=True)
             
 
         elif select_preset == "Competitive":
