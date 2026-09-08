@@ -82,11 +82,11 @@ class ViewMode(discord.ui.View):
             embed = discord.Embed(title=f"Performance Stats", color= color_per_level[self.player_infos["level"]])
 
             embed.set_thumbnail(url=self.player_infos["avatar"])
-            embed.add_field(name="Average K/D", value=self.player_infos["avgkd"], inline=True)
-            embed.add_field(name="Average Headshot %", value=self.player_infos["hsavg"], inline=True)
-            embed.add_field(name="\u200b", value="\u200b", inline=False)
-            embed.add_field(name="ADR", value=self.player_infos["adr"], inline=True)
-            embed.add_field(name="Winrate", value=self.player_infos["winrate"], inline=True)
+            embed.add_field(name="", value= f"**Average K/D**\n{self.player_infos['avgkd']}\n"
+                                            f"\n**ADR**\n{self.player_infos['adr']}", inline=True)
+            embed.add_field(name="", value= f"**Average Headshot %**\n{self.player_infos['hsavg']}\n"
+                                            f"\n**Winrate**\n{self.player_infos['winrate']}", inline=True)
+            
             embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {self.player_infos['ms']} ms")
 
             embed.timestamp = datetime.datetime.now()
