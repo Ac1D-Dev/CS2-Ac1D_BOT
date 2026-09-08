@@ -1,5 +1,5 @@
 import discord
-
+import datetime
 ###################################################################################
 
 
@@ -33,7 +33,8 @@ class ViewMode(discord.ui.View):
 
     @discord.ui.select(
         placeholder="Select a Preset",
-        options= [discord.SelectOption(label="Global"),
+        options= [discord.SelectOption(label="Default"),
+                discord.SelectOption(label="Global"),
                 discord.SelectOption(label="Competitive"),
                 discord.SelectOption(label="Performance")]
     )
@@ -42,9 +43,35 @@ class ViewMode(discord.ui.View):
 
         select_preset = select.values[0]
 
-        if select_preset == "Global":
 
-            embed = discord.Embed(title=f"Global Stats")
+        if select_preset == "Default":
+
+            embed = discord.Embed(title= f"- FaceIt Stats {self.player_infos['pseudo']} -", color= color_per_level[self.player_infos["level"]])
+            embed.set_thumbnail(url=self.player_infos["avatar"])
+            embed.add_field(name= "​​Level", value=self.player_infos["level"], inline=True)
+            embed.add_field(name= "Elo", value=self.player_infos["elo"], inline=True)
+            embed.add_field(name= "Matches", value=self.player_infos["matches"], inline=True)
+            embed.add_field(name= "Avg K/D", value=self.player_infos["avgkd"], inline=True)
+            embed.add_field(name= "Current Win Streak", value=self.player_infos["cwinstreak"], inline=True)
+            embed.add_field(name= "Wins", value=self.player_infos["wins"], inline=True)
+            embed.add_field(name= "Average Headshot %", value=self.player_infos["hsavg"], inline=True)
+            embed.add_field(name= "Longest Win Streak", value=self.player_infos["lwinstreak"], inline=True)
+            embed.add_field(name= "WinRate %", value=self.player_infos["winrate"], inline=True)
+            embed.add_field(name= "ADR", value=self.player_infos["adr"], inline=True)
+            embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {self.player_infos['ms']} ms")
+            
+            embed.timestamp = datetime.datetime.now()
+
+
+
+
+
+
+
+
+        elif select_preset == "Global":
+
+            embed = discord.Embed(title=f"Global Stats", color= color_per_level[self.player_infos["level"]])
 
             embed.set_thumbnail(url=self.player_infos["avatar"])
             embed.add_field(name="Level", value=self.player_infos["level"], inline=True)
@@ -52,22 +79,28 @@ class ViewMode(discord.ui.View):
             embed.add_field(name="Matches", value=self.player_infos["matches"], inline=True)
             embed.add_field(name="Wins", value=self.player_infos["wins"], inline=True)
             embed.add_field(name="Winrate", value=self.player_infos["winrate"], inline=True)
+            embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {self.player_infos['ms']} ms")
+                        
+            embed.timestamp = datetime.datetime.now()
             
 
         elif select_preset == "Performance":
 
-            embed = discord.Embed(title=f"Performance Stats")
+            embed = discord.Embed(title=f"Performance Stats", color= color_per_level[self.player_infos["level"]])
 
             embed.set_thumbnail(url=self.player_infos["avatar"])
             embed.add_field(name="Average K/D", value=self.player_infos["avgkd"], inline=True)
             embed.add_field(name="Average Headshot %", value=self.player_infos["hsavg"], inline=True)
             embed.add_field(name="Winrate", value=self.player_infos["winrate"], inline=True)
             embed.add_field(name="ADR", value=self.player_infos["adr"], inline=True)
+            embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {self.player_infos['ms']} ms")
+                        
+            embed.timestamp = datetime.datetime.now()
             
 
         elif select_preset == "Competitive":
 
-            embed = discord.Embed(title=f"Competitive Stats")
+            embed = discord.Embed(title=f"Competitive Stats", color= color_per_level[self.player_infos["level"]])
 
             embed.set_thumbnail(url=self.player_infos["avatar"])
             embed.add_field(name="Average Headshot %", value=self.player_infos["hsavg"], inline=True)
@@ -76,5 +109,8 @@ class ViewMode(discord.ui.View):
             embed.add_field(name="Winrate", value=self.player_infos["winrate"], inline=True)
             embed.add_field(name="Current Win Streak", value=self.player_infos["cwinstreak"], inline=True)
             embed.add_field(name="Longest Win Streak", value=self.player_infos["lwinstreak"], inline=True)
+            embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {self.player_infos['ms']} ms")
+                        
+            embed.timestamp = datetime.datetime.now()
             
         await interaction.response.edit_message(embed=embed)
