@@ -8,7 +8,7 @@ import datetime
 # Imports spécifiques
 from discord.ext import commands
 from dotenv import load_dotenv
-from utils import color_per_level, ViewMode
+from utils import color_per_level, ViewMode, default_embed
 
 #ouverture .env
 load_dotenv()
@@ -48,7 +48,6 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         level = player_infos["games"]["cs2"]["skill_level"]
         elo = player_infos["games"]["cs2"]["faceit_elo"]
 
-
         matches = info_stats["lifetime"]["Matches"]
         winrate = info_stats["lifetime"]["Win Rate %"]
         avgkd = info_stats["lifetime"]["Average K/D Ratio"]
@@ -61,29 +60,14 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         latency = bot.latency * 1000
         ms = round(latency, 2)
 
-        embed = discord.Embed(title= f"- FaceIt Stats {pseudo} -", color= color_per_level[level])
-        embed.set_thumbnail(url=avatar)
-        embed.add_field(name= "​​Level", value= level, inline=True)
-        embed.add_field(name= "Elo", value= elo, inline=True)
-        embed.add_field(name= "Matches", value= matches, inline=True)
-        embed.add_field(name= "Avg K/D", value= avgkd, inline=True)
-        embed.add_field(name= "Current Win Streak", value= cwinstreak, inline=True)
-        embed.add_field(name= "Wins", value= wins, inline=True)
-        embed.add_field(name= "Average Headshot %", value= hsavg, inline=True)
-        embed.add_field(name= "Longest Win Streak", value= lwinstreak, inline=True)
-        embed.add_field(name= "WinRate %", value= winrate, inline=True)
-        embed.add_field(name= "ADR", value= adr, inline=True)
-        embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {ms} ms")
-
-        embed.timestamp = datetime.datetime.now()
-
         stats = {
             "ms": ms, "pseudo": pseudo, "avatar": avatar,"level": level, "elo": elo, "matches": matches, "avgkd": avgkd,
             "cwinstreak": cwinstreak, "wins": wins, "hsavg": hsavg, "lwinstreak": lwinstreak,
             "winrate": winrate, "adr": adr 
         }
 
-
+        
+        embed = default_embed(stats)
         my_view = ViewMode(player_infos= stats)
         await interaction.response.send_message(embed=embed, view=my_view)
 
