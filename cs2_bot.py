@@ -33,17 +33,29 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
 
     try:
 
-        api_data = {"Authorization": "Bearer " + FACEIT_KEY }
-        player_pseudo = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_data)
+        api_pseudo = {"Authorization": "Bearer " + FACEIT_KEY }
+        player_pseudo = requests.get(f"https://open.faceit.com/data/v4/players?nickname={pseudo}", headers=api_pseudo)
         player_infos = player_pseudo.json()
 
-        player_id = player_infos["player_id"]
-        avatar = player_infos["avatar"]
+        if player_pseudo.status_code == 401:
+            embed = discord.Embed(title= "**- Error 401 : Unauthorized -**", color=color_per_level[1])
+
+            embed.add_field(name= f"Invalid Request",value= " invalid Bot config", inline=True)
+            return await interaction.response.send_message(embed=embed)
         
-        api_data_2 = {"Authorization": "Bearer " + FACEIT_KEY }
-        player_stats = requests.get(f"https://open.faceit.com/data/v4/players/{player_id}/stats/cs2", headers=api_data_2)
+        elif player_pseudo.status_code == 404:
+            embed = discord.Embed(title= "**- Error 404 : Not Found -**", color=color_per_level[1])
+
+            embed.add_field(name= f"**{pseudo}**",value= " is not a valid pseudo", inline=True)
+            return await interaction.response.send_message(embed=embed)
+        
+        player_id = player_infos["player_id"]
+
+        api_stats = {"Authorization": "Bearer " + FACEIT_KEY }
+        player_stats = requests.get(f"https://open.faceit.com/data/v4/players/{player_id}/stats/cs2", headers=api_stats)
         info_stats = player_stats.json()
 
+        avatar = player_infos["avatar"]
         level = player_infos["games"]["cs2"]["skill_level"]
         elo = player_infos["games"]["cs2"]["faceit_elo"]
 
@@ -65,7 +77,6 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
             "winrate": winrate, "adr": adr 
         }
 
-        
         embed = default_embed(stats)
         my_view = ViewMode(player_infos= stats)
         await interaction.response.send_message(embed=embed, view=my_view)
