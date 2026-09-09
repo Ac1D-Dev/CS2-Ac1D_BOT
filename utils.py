@@ -88,14 +88,14 @@ def default_embed(stats):
     
     embed.set_thumbnail(url=stats["avatar"])
     embed.add_field(name="", value= f"**Level**\n{stats['level']}\n"
-                                    f"\n**Average K/D**\n{stats['avgkd']}"
+                                    f"\n**Average K/D**\n{stats['avgkd']}\n"
                                     f"\n**Average Headshot %**\n{stats['hsavg']} %", inline=True)
     embed.add_field(name="", value= f"**Elo**\n{stats['elo']}\n"
-                                    f"\n**Current Winstreak**\n{stats['cwinstreak']}"
-                                    f"\n**Longest Winstreak**\n{stats['lwinstreak']}"
+                                    f"\n**Current Winstreak**\n{stats['cwinstreak']}\n"
+                                    f"\n**Longest Winstreak**\n{stats['lwinstreak']}\n"
                                     f"\n**ADR**\n{stats['adr']}", inline=True)
     embed.add_field(name="", value= f"**Matches**\n{stats['matches']}\n"
-                                    f"\n**Wins**\n{stats['wins']}"
+                                    f"\n**Wins**\n{stats['wins']}\n"
                                     f"\n**Win Rate %**\n{stats['winrate']} %", inline=True)
     
     embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {stats['ms']} ms")
