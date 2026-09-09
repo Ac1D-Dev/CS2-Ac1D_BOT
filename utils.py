@@ -72,6 +72,7 @@ class ViewMode(discord.ui.View):
         elif select_preset == "Competitive":
             embed = discord.Embed(title=f"Competitive Stats", color= color_per_level[self.player_infos["level"]])
 
+            embed.set_thumbnail(url=self.player_infos["avatar"])
             embed.add_field(name="", value= f"**Average Headshot % **\n{self.player_infos['hsavg']} %\n"
                                             f"\n**Win Rate %**\n{self.player_infos['winrate']} %", inline=True)
             embed.add_field(name="", value= f"**Average K/D**\n{self.player_infos['avgkd']}\n"
