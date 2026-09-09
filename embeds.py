@@ -5,10 +5,8 @@ import datetime
 from utils import color_per_level
 
 def on_app_command_error_embed(error, ms):
-
-
     embed = discord.Embed(title= "",description=f"Active CoolDown\n"
-                                                f" Retry in {error.retry_after:.1f} secondes")
+                                                f"\nRetry in {error.retry_after:.1f} secondes")
     
     embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {ms} ms")
     embed.timestamp = datetime.datetime.now()
