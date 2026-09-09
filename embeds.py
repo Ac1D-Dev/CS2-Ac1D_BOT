@@ -1,12 +1,12 @@
 import discord
 import datetime
-import cs2_bot
+
 
 from utils import color_per_level
 
-def on_app_command_error_embed(error):
-    latency = cs2_bot.bot.latency * 1000
-    ms = round(latency, 2)
+def on_app_command_error_embed(error, ms):
+
+
     embed = discord.Embed(title= "",description=f"Active CoolDown\n"
                                                 f" Retry in {error.retry_after:.1f} secondes")
     

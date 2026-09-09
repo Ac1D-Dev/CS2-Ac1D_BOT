@@ -30,8 +30,11 @@ async def on_ready():
 
 @bot.tree.error
 async def on_app_command_error(interaction, error):
+    latency = bot.latency * 1000
+    ms = round(latency, 2)
+
     if isinstance(error, discord.app_commands.CommandOnCooldown):
-        embed = embeds.on_app_command_error_embed(error)
+        embed = embeds.on_app_command_error_embed(error, ms)
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
 @bot.tree.command(name="ping", description="Detection Test for development")
