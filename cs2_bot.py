@@ -21,7 +21,7 @@ FACEIT_KEY= os.getenv("FACEIT_API_KEY")
 intents = discord.Intents.default()
 intents.message_content = True
 
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix= "!", intents=intents)
 
 @bot.event
 async def on_ready():
@@ -31,6 +31,8 @@ async def on_ready():
 @bot.tree.command(name="ping", description="Detection Test for development")
 async def ping(interaction: discord.Interaction):
     await interaction.response.send_message(f"Connection Established {bot.user} !")
+
+@discord.app_commands.checks.cooldown(1, 10)
 
 @bot.tree.command(name="faceit", description="Display player FaceIt stats")
 async def faceit(interaction: discord.Interaction, pseudo: str):
@@ -84,7 +86,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
     except requests.exceptions.ConnectionError:
         embed = discord.Embed(title= "- FaceIt Server Unjoinable -", color=utils.color_per_level[1])
 
-        
+
         await interaction.response.send_message(embed=embed)
 
     except KeyError:
