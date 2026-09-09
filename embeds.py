@@ -1,13 +1,16 @@
 import discord
 import datetime
+import cs2_bot
 
 from utils import color_per_level
 
-def on_app_command_error_embed(stats, error):
+def on_app_command_error_embed(error):
+    latency = cs2_bot.bot.latency * 1000
+    ms = round(latency, 2)
     embed = discord.Embed(title= "",description=f"Active CoolDown\n"
-                                                f" Retry in {error.retry_after} secondes")
+                                                f" Retry in {error.retry_after:.1f} secondes")
     
-    embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {stats['ms']} ms")
+    embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {ms} ms")
     embed.timestamp = datetime.datetime.now()
     return embed
 

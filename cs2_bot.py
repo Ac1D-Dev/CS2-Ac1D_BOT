@@ -29,9 +29,9 @@ async def on_ready():
     print(f"Connect as {bot.user}")
 
 @bot.tree.error
-async def on_app_command_error(interaction,stats, error):
+async def on_app_command_error(interaction, error):
     if isinstance(error, discord.app_commands.CommandOnCooldown):
-        embed = embeds.on_app_command_error_embed(stats, error)
+        embed = embeds.on_app_command_error_embed(error)
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
 @bot.tree.command(name="ping", description="Detection Test for development")
