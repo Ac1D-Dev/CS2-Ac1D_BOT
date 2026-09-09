@@ -32,8 +32,8 @@ async def on_ready():
 async def on_app_command_error(interaction, error):
     if isinstance(error, discord.app_commands.CommandOnCooldown):
         embed = discord.Embed(title= "",description=f"Active CoolDown\n"
-                                                    f" Retry in {error.retry_after} secondes",
-                                                    ephemeral=True)
+                                                    f" Retry in {error.retry_after} secondes"
+                                                    )
         await interaction.response.send_message(embed=embed)
 
 @bot.tree.command(name="ping", description="Detection Test for development")
