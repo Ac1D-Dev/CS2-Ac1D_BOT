@@ -56,7 +56,7 @@ def performance_embed(stats):
 
 def competitive_embed(stats):
     embed = discord.Embed(title=f"- Competitive Stats -",description=   f"Current Win Streak {stats['cwinstreak']} •" 
-                                                                        f" Longest Win Streak {stats['lwinstreak']}",
+                                                                        f" Longest Win Streak {stats['lwinstreak']}\n",
                                                                         color= color_per_level[stats["level"]])
     
     embed.set_author(name=stats["pseudo"], icon_url=stats["avatar"])
