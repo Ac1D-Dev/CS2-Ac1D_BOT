@@ -77,7 +77,7 @@ class ViewMode(discord.ui.View):
                                             f"\n**Win Rate %**\n{self.player_infos['winrate']} %", inline=True)
             embed.add_field(name="", value= f"**Average K/D**\n{self.player_infos['avgkd']}\n"
                                             f"\n**Current Winstreak**\n{self.player_infos['cwinstreak']}", inline=True)
-            embed.add_field(name="", value= f"**Wins**\n{self.player_infos['wins']}"
+            embed.add_field(name="", value= f"**Wins**\n{self.player_infos['wins']}\n"
                                             f"\n**Longest Winstreak**\n{self.player_infos['lwinstreak']}", inline=True)
             embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {self.player_infos['ms']} ms")            
             embed.timestamp = datetime.datetime.now()
