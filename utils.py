@@ -47,7 +47,7 @@ class ViewMode(discord.ui.View):
             embed = default_embed(self.player_infos)
 
         elif select_preset == "Global":
-            embed = discord.Embed(title=f"Global Stats", color= color_per_level[self.player_infos["level"]])
+            embed = discord.Embed(title=f"- Global Stats -", color= color_per_level[self.player_infos["level"]])
 
             embed.set_thumbnail(url=self.player_infos["avatar"])
             embed.add_field(name="", value= f"**Level**\n{self.player_infos['level']}\n"
@@ -59,7 +59,7 @@ class ViewMode(discord.ui.View):
             embed.timestamp = datetime.datetime.now()
             
         elif select_preset == "Performance":
-            embed = discord.Embed(title=f"Performance Stats", color= color_per_level[self.player_infos["level"]])
+            embed = discord.Embed(title=f"- Performance Stats -", color= color_per_level[self.player_infos["level"]])
 
             embed.set_thumbnail(url=self.player_infos["avatar"])
             embed.add_field(name="", value= f"**Average K/D**\n{self.player_infos['avgkd']}\n"
@@ -70,7 +70,7 @@ class ViewMode(discord.ui.View):
             embed.timestamp = datetime.datetime.now()
 
         elif select_preset == "Competitive":
-            embed = discord.Embed(title=f"Competitive Stats", color= color_per_level[self.player_infos["level"]])
+            embed = discord.Embed(title=f"- Competitive Stats -", color= color_per_level[self.player_infos["level"]])
 
             embed.set_thumbnail(url=self.player_infos["avatar"])
             embed.add_field(name="", value= f"**Average Headshot % **\n{self.player_infos['hsavg']} %\n"
