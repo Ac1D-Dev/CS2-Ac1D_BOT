@@ -81,10 +81,16 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         my_view = views.ViewMode(stats= stats)
         await interaction.response.send_message(embed=embed, view=my_view)
 
-    except KeyError:
+    except requests.exceptions.ConnectionError:
+        embed = discord.Embed(title= "- FaceIt Server Unjoinable -", color=utils.color_per_level[1])
 
+        
+        await interaction.response.send_message(embed=embed)
+
+    except KeyError:
         embed = discord.Embed(title= "- UNKNOWN PLAYER -", color=utils.color_per_level[1])
-        embed.add_field(name= f"​❓{pseudo}​❓",value= " is not a valid pseudo", inline=True)
+
+        embed.add_field(name= f"{pseudo}",value= " is not a valid pseudo", inline=True)
         await interaction.response.send_message(embed=embed)
 
 bot.run(TOKEN)
