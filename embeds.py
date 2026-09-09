@@ -4,9 +4,9 @@ import datetime
 from utils import color_per_level
 
 def default_embed(stats):
-    embed = discord.Embed(title=f"- Default Stats -", description= f"Level {stats['level']} •"
+    embed = discord.Embed(title=f"- Default Stats -", description=  f"Level {stats['level']} •"
                                                                     f" {stats['elo']} Elo •"
-                                                                    f" {stats['matches']} Matchs",  
+                                                                    f" {stats['matches']} Matchs\n",  
                                                                     color= color_per_level[stats["level"]])
     
     embed.set_author(name=stats["pseudo"], icon_url=stats["avatar"])
@@ -27,7 +27,7 @@ def default_embed(stats):
 def global_embed(stats):
     embed = discord.Embed(title=f"- Global Stats -",description=f"{stats['elo']} Elo •" 
                                                                 f" {stats['wins']} Wins •"
-                                                                f" {stats['winrate']} % WinRate",
+                                                                f" {stats['winrate']} % WinRate\n",
                                                                 color= color_per_level[stats["level"]])
     
     embed.set_author(name=stats["pseudo"], icon_url=stats["avatar"])
@@ -42,7 +42,7 @@ def global_embed(stats):
 
 def performance_embed(stats):
     embed = discord.Embed(title=f"- Performance Stats -", description=  f"Average K/D {stats['avgkd']} •" 
-                                                                        f" {stats['adr']} ADR",
+                                                                        f" {stats['adr']} ADR\n",
                                                                         color= color_per_level[stats["level"]])
 
     embed.set_author(name=stats["pseudo"], icon_url=stats["avatar"])
