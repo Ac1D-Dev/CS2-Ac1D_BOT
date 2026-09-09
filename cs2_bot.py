@@ -28,6 +28,11 @@ async def on_ready():
     await bot.tree.sync()
     print(f"Connect as {bot.user}")
 
+@bot.tree.error
+async def on_app_command_error(interaction, error):
+    if isinstance(error, discord.app_commands.CommandOnCooldown):
+        await interaction.response.send_message(f"Active CoolDown, Retry in {error.retry_after} secondes", ephemeral=True)
+
 @bot.tree.command(name="ping", description="Detection Test for development")
 async def ping(interaction: discord.Interaction):
     await interaction.response.send_message(f"Connection Established {bot.user} !")
