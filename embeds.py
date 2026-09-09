@@ -3,6 +3,14 @@ import datetime
 
 from utils import color_per_level
 
+def on_app_command_error_embed(stats, error):
+    embed = discord.Embed(title= "",description=f"Active CoolDown\n"
+                                                f" Retry in {error.retry_after} secondes")
+    
+    embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {stats['ms']} ms")
+    embed.timestamp = datetime.datetime.now()
+    return embed
+
 def default_embed(stats):
     embed = discord.Embed(title=f"- Default Stats -", description=  f"Level {stats['level']} •"
                                                                     f" {stats['elo']} Elo •"
