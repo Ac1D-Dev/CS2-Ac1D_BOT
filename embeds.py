@@ -6,7 +6,7 @@ from utils import color_per_level
 def default_embed(stats):
     embed = discord.Embed(title= f"- FaceIt Stats {stats['pseudo']} -", color= color_per_level[stats["level"]])
     
-    embed.set_thumbnail(url=stats["avatar"])
+    embed.set_author(name=stats["pseudo"], icon_url=stats["avatar"])
     embed.add_field(name="", value= f"**Level**\n{stats['level']}\n"
                                     f"\n**Average K/D**\n{stats['avgkd']}\n"
                                     f"\n**Average Headshot %**\n{stats['hsavg']} %", inline=True)
@@ -24,7 +24,7 @@ def default_embed(stats):
 def global_embed(stats):
     embed = discord.Embed(title=f"- Global Stats -", color= color_per_level[stats["level"]])
     
-    embed.set_thumbnail(url=stats["avatar"])
+    embed.set_author(name=stats["pseudo"], icon_url=stats["avatar"])
     embed.add_field(name="", value= f"**Level**\n{stats['level']}\n"
                                     f"\n**Wins**\n{stats['wins']}", inline=True)
     embed.add_field(name="", value= f"**Elo**\n{stats['elo']}\n"
@@ -37,7 +37,7 @@ def global_embed(stats):
 def performance_embed(stats):
     embed = discord.Embed(title=f"- Performance Stats -", color= color_per_level[stats["level"]])
 
-    embed.set_thumbnail(url=stats["avatar"])
+    embed.set_author(name=stats["pseudo"], icon_url=stats["avatar"])
     embed.add_field(name="", value= f"**Average K/D**\n{stats['avgkd']}\n"
                                     f"\n**ADR**\n{stats['adr']}", inline=True)
     embed.add_field(name="", value= f"**Average Headshot %**\n{stats['hsavg']} %\n"
@@ -49,7 +49,7 @@ def performance_embed(stats):
 def competitive_embed(stats):
     embed = discord.Embed(title=f"- Competitive Stats -", color= color_per_level[stats["level"]])
     
-    embed.set_thumbnail(url=stats["avatar"])
+    embed.set_author(name=stats["pseudo"], icon_url=stats["avatar"])
     embed.add_field(name="", value= f"**Average Headshot % **\n{stats['hsavg']} %\n"
                                     f"\n**Win Rate %**\n{stats['winrate']} %", inline=True)
     embed.add_field(name="", value= f"**Average K/D**\n{stats['avgkd']}\n"
