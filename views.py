@@ -6,6 +6,14 @@ class ViewMode(discord.ui.View):
         super().__init__()
         self.stats = stats
 
+    async def on_timeout(self):
+        embed = embeds.expired_embed(self.stats["ms"])
+
+        await self.message.edit(embed = embed, view=None)
+        await super().on_timeout()
+        
+
+
     @discord.ui.select(
         placeholder="Select a Preset",
         options= [discord.SelectOption(label="Default"),

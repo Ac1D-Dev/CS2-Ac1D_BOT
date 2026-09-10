@@ -91,6 +91,7 @@ async def faceit(interaction: discord.Interaction, pseudo: str):
         embed = embeds.default_embed(stats)
         my_view = views.ViewMode(stats= stats)
         await interaction.response.send_message(embed=embed, view=my_view)
+        my_view.message = await interaction.original_response()
 
     except requests.exceptions.ConnectionError:
         embed = discord.Embed(title= "- FaceIt Server Unjoinable -", color=utils.color_per_level[1])
