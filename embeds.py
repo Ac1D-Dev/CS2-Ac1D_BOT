@@ -5,7 +5,8 @@ import datetime
 from utils import color_per_level
 
 def expired_embed(ms):
-    embed = discord.Embed(title="", description="⌛ Expired: due to no interaction received in 180 seconds.")
+    embed = discord.Embed(title="", description="⌛ Expired: ⌛\n"
+                                                "Due to inactivity for 180 seconds.")
 
     embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {ms} ms")
     embed.timestamp = datetime.datetime.now()
