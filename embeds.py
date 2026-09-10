@@ -6,7 +6,8 @@ from utils import color_per_level
 
 def expired_embed(ms):
     embed = discord.Embed(title="", description="**⌛ Expired: ⌛\n**"
-                                                "\n**Due to inactivity for 180 seconds.**")
+                                                "\n**Due to inactivity for 180 seconds.**",
+                                                color= color_per_level[10])
 
     embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {ms} ms")
     embed.timestamp = datetime.datetime.now()
