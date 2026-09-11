@@ -9,8 +9,8 @@ def setup(bot):
         latency = bot.latency * 1000
         ms = round(latency, 2)
 
-        embed = discord.Embed(title=f"- Ping Test -" ,color= utils.color_per_level[8])
-        embed.add_field(name= "", value=f"**Ping : {ms} ms\n**"
-                                        f"\n**CS2 Bot Tracker is Connected**")
+        embed = discord.Embed(title=f"📶** - Ping Test - **📶" ,color= utils.color_per_level[8])
+        embed.add_field(name= "", value=f"🗳️ ** Ping : {ms} ms\n** 🗳️"
+                                        f"\n📡** CS2 Bot Tracker is Connected **📡")
         embed.timestamp = datetime.datetime.now()
         await interaction.response.send_message(embed= embed)
