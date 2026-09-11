@@ -3,6 +3,7 @@ import os
 import discord
 import embeds
 import faceit_command
+import ping_command
 
 
 # Imports spécifiques
@@ -20,6 +21,7 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix= "!", intents=intents)
 
+ping_command.setup(bot)
 faceit_command.setup(bot, FACEIT_KEY)
 
 @bot.event
@@ -35,10 +37,5 @@ async def on_app_command_error(interaction, error):
     if isinstance(error, discord.app_commands.CommandOnCooldown):
         embed = embeds.on_app_command_error_embed(error, ms)
         await interaction.response.send_message(embed=embed, ephemeral=True)
-
-@bot.tree.command(name="ping", description="Detection Test for development")
-async def ping(interaction: discord.Interaction):
-    await interaction.response.send_message(f"Connection Established {bot.user} !")
-
 
 bot.run(TOKEN)

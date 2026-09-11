@@ -1,6 +1,5 @@
 import discord
 import requests
-import embeds
 import errors
 import utils
 
