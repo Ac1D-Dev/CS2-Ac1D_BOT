@@ -13,6 +13,6 @@ def setup(bot):
 
         embed = discord.Embed(title=f"- Ping Test -")
         embed.add_field(name= "", value=f"**Ping : {ms} ms\n**", inline=True)
-        embed.add_field(name="", value=f"**\nCS2 Bot Tracker is Connected**")
+        embed.add_field(name="", value=f"**\nCS2 Bot Tracker is Connected**", inline=True)
         embed.timestamp = datetime.datetime.now()
         await interaction.response.send_message(embed= embed)
