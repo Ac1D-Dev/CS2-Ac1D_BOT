@@ -25,6 +25,7 @@ async def handle_error_status(response, pseudo, interaction):
         return True
 
     #TODO inserer code de status dans le nom de l'erreur
+
     elif response.status_code >= 500:
         embed = discord.Embed(title= "❗**- Error 5xx (500-599) : FaceIt Server Failed -**❗", color=color_per_level[1])
         
