@@ -1,7 +1,10 @@
 import discord 
 import embeds
+import nicknames
+import faceit_api
+import utils
 
-class ViewMode(discord.ui.View):
+class ViewStats(discord.ui.View):
     def __init__(self, stats):
         super().__init__()
         self.stats = stats
@@ -38,3 +41,42 @@ class ViewMode(discord.ui.View):
         elif select_preset == "Competitive":
             embed = embeds.competitive_embed(self.stats)
         await interaction.response.edit_message(embed=embed)
+
+
+
+
+
+
+
+NICKNAME_FILE = "nicknames.json"
+class ViewProfile(discord.ui.View):
+    def __init__(self, pseudo_faceit):
+        super().__init__()
+        self.pseudo_faceit = pseudo_faceit
+
+
+    @discord.ui.button(label="Confirm", style=discord.ButtonStyle.green)
+
+    async def confirm(self, interaction, button):
+        discord_id = str(interaction.user.id)
+
+        data = nicknames.load_data(NICKNAME_FILE)
+        data[discord_id] = self.pseudo_faceit['pseudo']
+        nicknames.save_data(NICKNAME_FILE, data)
+
+        embed = discord.Embed(title= "** - Confirmed - **", color= utils.color_per_level[4])
+        embed.add_field(name=f"** Discord User Account -> {discord_id} <- Linked to : **", value=f"** {self.pseudo_faceit['pseudo']} **", inline=True)
+        
+        await interaction.response.edit_message(embed=embed, view=None)
+
+    @discord.ui.button(label="Deny", style=discord.ButtonStyle.red)
+
+    async def deny(self,  interaction: discord.Interaction, button: discord.ui.Button):
+    
+        
+        embed = discord.Embed(title= "** - Denied - **", color= utils.color_per_level[10])
+        embed.add_field(name=f"** Interruption: **", value=f"** Link Process Denied **", inline=True)
+        
+        
+                
+        await interaction.response.edit_message(embed=embed, view=None)
