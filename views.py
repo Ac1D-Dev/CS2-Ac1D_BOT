@@ -65,7 +65,7 @@ class ViewProfile(discord.ui.View):
         nicknames.save_data(NICKNAME_FILE, data)
 
         embed = discord.Embed(title= "** - Confirmed - **", color= utils.color_per_level[4])
-        embed.add_field(name=f"** Discord User Account -> {discord_id} <- Linked to : **", value=f"** {self.pseudo_faceit['pseudo']} **", inline=True)
+        embed.add_field(name=f"** Discord User Account -> {interaction.user} <- Linked to : **", value=f"** {self.pseudo_faceit['pseudo']} **", inline=True)
         
         await interaction.response.edit_message(embed=embed, view=None)
 
