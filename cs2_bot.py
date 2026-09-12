@@ -22,8 +22,8 @@ intents.message_content = True
 bot = commands.Bot(command_prefix= "!", intents=intents)
 
 ping_command.setup(bot)
-faceit_command.setup(bot, FACEIT_KEY)
 compare_command.setup(bot, FACEIT_KEY)
+faceit_command.setup(bot, FACEIT_KEY)
 
 @bot.event
 async def on_ready():
