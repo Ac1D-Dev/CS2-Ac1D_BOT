@@ -8,6 +8,9 @@ import datetime
 
 from utils import color_per_level
 
+
+
+
 ##############################
 #      Expired Function      #
 ##############################
@@ -105,25 +108,25 @@ def competitive_embed(stats):
 #             Compare Command              #               
 ############################################
 
-def comparator(stats1, stats2):
+def comparator(stats1, stats2, decimales):
     stats1 = float(stats1)
     stats2 = float(stats2)
 
     difference = abs(stats1 - stats2)
 
     if stats1 > stats2:
-        return f" 🔺 ** {difference:.1f} ** "
+        return f" 🔺 ** {difference:.{decimales}f} ** "
     elif stats1 < stats2:
-        return f" 🔻 ** {difference:.1f} ** "
+        return f" 🔻 ** {difference:.{decimales}f} ** "
     else:
         return "🟰"
 
 def compare_embed(stats1, stats2):
-    level_comparator = comparator(stats1["level"], stats2["level"])
-    avgkd_comparator = comparator(stats1["avgkd"], stats2["avgkd"])
-    hsavg_comparator = comparator(stats1["hsavg"], stats2["hsavg"])
-    elo_comparator = comparator(stats1['elo'], stats2["elo"])
-    winrate_comparator = comparator(stats1["winrate"], stats2["winrate"])
+    level_comparator = comparator(stats1["level"], stats2["level"], 0)
+    avgkd_comparator = comparator(stats1["avgkd"], stats2["avgkd"], 2)
+    hsavg_comparator = comparator(stats1["hsavg"], stats2["hsavg"], 2)
+    elo_comparator = comparator(stats1['elo'], stats2["elo"], 0)
+    winrate_comparator = comparator(stats1["winrate"], stats2["winrate"], 2)
 
     embed = discord.Embed(title=" - Comparison - ")
     embed.set_author(name=stats1["pseudo"], icon_url=stats1["avatar"])
