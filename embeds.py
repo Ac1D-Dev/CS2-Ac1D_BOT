@@ -112,9 +112,9 @@ def comparator(stats1, stats2):
     difference = abs(stats1 - stats2)
 
     if stats1 > stats2:
-        return f" 🔺** {difference}**"
+        return f" 🔺** {difference:.1f} **"
     elif stats1 < stats2:
-        return f" 🔻** {difference}**"
+        return f" 🔻** {difference:.1f} **"
     else:
         return "🟰"
 
@@ -133,11 +133,11 @@ def compare_embed(stats1, stats2):
                                                 f"\n**📈 Elo**\n{stats1['elo']}\n"
                                                 f"\n**📊 Win Rate %**\n{stats1['winrate']} %", inline=True)
 
-    embed.add_field(name="Comparator",value=f" **{level_comparator}** "      #Ce sont les stats du joueur1 qui sont comparés au joueur2 donc
-                                            f"\n**{avgkd_comparator}**\n"    #si le joueur1 a une meilleure stats on verra 🔺 vert et a l'inverse un 🔻, avec          🔺
-                                            f"\n**{hsavg_comparator}**\n"    #en dessous la valeur de difference par ex(kd joueur1 = 2 et kd joueur2 = 1.5 alors mettre 0.5)
-                                            f"\n**{elo_comparator}**\n"
-                                            f"\n**{winrate_comparator}**\n", inline=True)
+    embed.add_field(name="Comparator",value=f" **{level_comparator}**\n "      #Ce sont les stats du joueur1 qui sont comparés au joueur2 donc
+                                            f"\n\n**{avgkd_comparator}**\n"    #si le joueur1 a une meilleure stats on verra 🔺 vert et a l'inverse un 🔻, avec          🔺
+                                            f"\n\n**{hsavg_comparator}**\n"    #en dessous la valeur de difference par ex(kd joueur1 = 2 et kd joueur2 = 1.5 alors mettre 0.5)
+                                            f"\n\n**{elo_comparator}**\n"
+                                            f"\n\n**{winrate_comparator}**\n", inline=True)
 
     embed.add_field(name=stats2["pseudo"],value=f"**🎖️ Level**\n{stats2['level']}\n"
                                                 f"\n**🎯 Average K/D**\n{stats2['avgkd']}\n"
