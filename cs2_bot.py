@@ -38,5 +38,7 @@ async def on_app_command_error(interaction, error):
     if isinstance(error, discord.app_commands.CommandOnCooldown):
         embed = embeds.on_app_command_error_embed(error, ms)
         await interaction.response.send_message(embed=embed, ephemeral=True)
-
+    else:
+        print(error)
+        
 bot.run(TOKEN)
