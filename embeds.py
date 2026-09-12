@@ -1,8 +1,16 @@
+########################
+#       Imports        #
+########################
+
 import discord
 import datetime
 
 
 from utils import color_per_level
+
+##############################
+#      Expired Function      #
+##############################
 
 def expired_embed(ms):
     embed = discord.Embed(title="", description="**⌛ Expired: ⌛\n**"
@@ -21,6 +29,10 @@ def on_app_command_error_embed(error, ms):
     embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {ms} ms")
     embed.timestamp = datetime.datetime.now()
     return embed
+
+########################################
+#       Menu Deroulant /faceit         #
+########################################
 
 def default_embed(stats):
     embed = discord.Embed(title=f"- Default Stats -", description=  f"Level {stats['level']} •"
@@ -89,15 +101,40 @@ def competitive_embed(stats):
     embed.timestamp = datetime.datetime.now()
     return embed
 
-def compare_embed(stats1, stats2):
-    embed = discord.Embed(title=" - Comparison - ")
+############################################
+#             Compare Command              #               
+############################################
 
+def comparator(stats1, stats2):
+    difference = abs(stats1 - stats2)
+
+    if stats1 > stats2:
+        return f" 🔺** {difference}**"
+    elif stats1 < stats2:
+        return f" 🔻** {difference}**"
+    else:
+        return "🟰"
+
+def compare_embed(stats1, stats2):
+    level_comparator = comparator(stats1["level"], stats2["level"])
+    avgkd_comparator = comparator(stats1["avgkd"], stats2["avgkd"])
+    hsavg_comparator = comparator(stats1["hsavg"], stats2["hsavg"])
+    elo_comparator = comparator(stats1['elo'], stats2["elo"])
+    winrate_comparator = comparator(stats1["winrate"], stats2["winrate"])
+
+    embed = discord.Embed(title=" - Comparison - ")
     embed.set_author(name=stats1["pseudo"], icon_url=stats1["avatar"])
     embed.add_field(name=stats1['pseudo'], value= f"**🎖️ Level**\n{stats1['level']}\n"
                                                 f"\n**🎯 Average K/D**\n{stats1['avgkd']}\n"
                                                 f"\n**💥 Average Headshot %**\n{stats1['hsavg']} %\n"
                                                 f"\n**📈 Elo**\n{stats1['elo']}\n"
                                                 f"\n**📊 Win Rate %**\n{stats1['winrate']} %", inline=True)
+
+    embed.add_field(name="Comparator",value=f" **{level_comparator}** "      #Ce sont les stats du joueur1 qui sont comparés au joueur2 donc
+                                            f"\n**{avgkd_comparator}**\n"    #si le joueur1 a une meilleure stats on verra 🔺 vert et a l'inverse un 🔻, avec          🔺
+                                            f"\n**{hsavg_comparator}**\n"    #en dessous la valeur de difference par ex(kd joueur1 = 2 et kd joueur2 = 1.5 alors mettre 0.5)
+                                            f"\n**{elo_comparator}**\n"
+                                            f"\n**{winrate_comparator}**\n", inline=True)
 
     embed.add_field(name=stats2["pseudo"],value=f"**🎖️ Level**\n{stats2['level']}\n"
                                                 f"\n**🎯 Average K/D**\n{stats2['avgkd']}\n"
