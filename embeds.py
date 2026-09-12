@@ -88,3 +88,24 @@ def competitive_embed(stats):
     embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {stats['ms']} ms")            
     embed.timestamp = datetime.datetime.now()
     return embed
+
+def compare_embed(stats1, stats2):
+    embed = discord.Embed(title=" - Comparison - ")
+
+    embed.set_author(name=stats1["pseudo"], icon_url=stats1["avatar"])
+    embed.add_field(name=stats1['pseudo'], value= f"**🎖️ Level**\n{stats1['level']}\n"
+                                                f"\n**🎯 Average K/D**\n{stats1['avgkd']}\n"
+                                                f"\n**💥 Average Headshot %**\n{stats1['hsavg']} %\n"
+                                                f"\n**📈 Elo**\n{stats1['elo']}\n"
+                                                f"\n**📊 Win Rate %**\n{stats1['winrate']} %", inline=True)
+
+    embed.add_field(name=stats2["pseudo"],value=f"**🎖️ Level**\n{stats2['level']}\n"
+                                                f"\n**🎯 Average K/D**\n{stats2['avgkd']}\n"
+                                                f"\n**💥 Average Headshot %**\n{stats2['hsavg']} %\n"
+                                                f"\n**📈 Elo**\n{stats2['elo']}\n"
+                                                f"\n**📊 Win Rate %**\n{stats2['winrate']} %", inline=True)
+
+    embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {stats1['ms']} ms")
+    embed.timestamp = datetime.datetime.now()
+
+    return embed
