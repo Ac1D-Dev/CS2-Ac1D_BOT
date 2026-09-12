@@ -1,5 +1,7 @@
 import json
 
+NICKNAME_FILE = "nicknames.json"
+
 def load_data(nickname_path):
     try:
         with open(nickname_path, "r") as nicknames:

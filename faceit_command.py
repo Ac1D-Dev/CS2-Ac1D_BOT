@@ -4,15 +4,28 @@ import utils
 import embeds
 import views
 import faceit_api
+import nicknames
 
 def setup(bot, FACEIT_KEY):
 
     @discord.app_commands.checks.cooldown(1, 10)
 
     @bot.tree.command(name="faceit", description="Display player FaceIt stats")
-    async def faceit(interaction: discord.Interaction, pseudo: str):
+    async def faceit(interaction: discord.Interaction, pseudo: str = None):
 
         try:
+            if pseudo is None:
+                data = nicknames.load_data(nicknames.NICKNAME_FILE)
+                discord_id = str(interaction.user.id)
+
+                if discord_id not in data:
+                    embed= discord.Embed(title="- No Account Linked -", color=utils.color_per_level[1])
+                    embed.add_field(name="You need to enter a nickname or use /setnick first.",value= "", inline=True)
+                    await interaction.response.send_message(embed=embed)
+                    return  
+                pseudo = data[discord_id]
+
+
             stats = await faceit_api.faceit_key(bot, pseudo, FACEIT_KEY, interaction)
 
             if not isinstance(stats, dict):

@@ -48,7 +48,6 @@ class ViewStats(discord.ui.View):
 
 
 
-NICKNAME_FILE = "nicknames.json"
 class ViewProfile(discord.ui.View):
     def __init__(self, pseudo_faceit):
         super().__init__()
@@ -60,9 +59,9 @@ class ViewProfile(discord.ui.View):
     async def confirm(self, interaction, button):
         discord_id = str(interaction.user.id)
 
-        data = nicknames.load_data(NICKNAME_FILE)
+        data = nicknames.load_data(nicknames.NICKNAME_FILE)
         data[discord_id] = self.pseudo_faceit['pseudo']
-        nicknames.save_data(NICKNAME_FILE, data)
+        nicknames.save_data(nicknames.NICKNAME_FILE, data)
 
         embed = discord.Embed(title= "** - Confirmed - **", color= utils.color_per_level[4])
         embed.add_field(name=f"** Discord User Account -> {interaction.user} <- Linked to : **", value=f"** {self.pseudo_faceit['pseudo']} **", inline=True)
