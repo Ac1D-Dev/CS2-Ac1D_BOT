@@ -4,7 +4,7 @@ import discord
 import embeds
 import faceit_command
 import ping_command
-
+import compare_command
 
 # Imports spécifiques
 from discord.ext import commands
@@ -23,6 +23,7 @@ bot = commands.Bot(command_prefix= "!", intents=intents)
 
 ping_command.setup(bot)
 faceit_command.setup(bot, FACEIT_KEY)
+compare_command.setup(bot, FACEIT_KEY)
 
 @bot.event
 async def on_ready():
