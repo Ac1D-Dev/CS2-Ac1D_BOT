@@ -112,9 +112,9 @@ def comparator(stats1, stats2):
     difference = abs(stats1 - stats2)
 
     if stats1 > stats2:
-        return f" 🔺** {difference:.1f} **"
+        return f" 🔺 ** {difference:.1f} ** "
     elif stats1 < stats2:
-        return f" 🔻** {difference:.1f} **"
+        return f" 🔻 ** {difference:.1f} ** "
     else:
         return "🟰"
 
