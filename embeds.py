@@ -124,9 +124,9 @@ def comparator(stats1, stats2, decimales):
 def compare_embed(stats1, stats2):
     level_comparator = comparator(stats1["level"], stats2["level"], 0)
     avgkd_comparator = comparator(stats1["avgkd"], stats2["avgkd"], 2)
-    hsavg_comparator = comparator(stats1["hsavg"], stats2["hsavg"], 2)
+    hsavg_comparator = comparator(stats1["hsavg"], stats2["hsavg"], 0)
     elo_comparator = comparator(stats1['elo'], stats2["elo"], 0)
-    winrate_comparator = comparator(stats1["winrate"], stats2["winrate"], 2)
+    winrate_comparator = comparator(stats1["winrate"], stats2["winrate"], 0)
 
     embed = discord.Embed(title=" - Comparison - ")
     embed.set_author(name=stats1["pseudo"], icon_url=stats1["avatar"])
