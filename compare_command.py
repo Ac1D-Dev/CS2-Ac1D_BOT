@@ -1,7 +1,7 @@
 import discord
 import faceit_api
 import embeds
-import utils
+
 
 
 
