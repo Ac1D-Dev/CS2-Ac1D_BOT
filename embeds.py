@@ -106,6 +106,9 @@ def competitive_embed(stats):
 ############################################
 
 def comparator(stats1, stats2):
+    stats1 = float(stats1)
+    stats2 = float(stats2)
+
     difference = abs(stats1 - stats2)
 
     if stats1 > stats2:
