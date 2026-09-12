@@ -137,8 +137,8 @@ def compare_embed(stats1, stats2):
                                                 f"\n**📊 Win Rate %**\n{stats1['winrate']} %", inline=True)
 
     embed.add_field(name="Comparator",value=f" **{level_comparator}**\n "      #Ce sont les stats du joueur1 qui sont comparés au joueur2 donc
-                                            f"\n\n**{avgkd_comparator}**\n"    #si le joueur1 a une meilleure stats on verra 🔺 vert et a l'inverse un 🔻, avec          🔺
-                                            f"\n\n**{hsavg_comparator}**\n"    #en dessous la valeur de difference par ex(kd joueur1 = 2 et kd joueur2 = 1.5 alors mettre 0.5)
+                                            f"\n\n**{avgkd_comparator}**\n"    #si le joueur1 a une meilleure stats on verra 🔺 vert et a l'inverse un 🔻, avec          
+                                            f"\n\n**{hsavg_comparator}**\n"    #en dessous la valeur de difference par ex(kd joueur1 = 2 et kd joueur2 = 1.5 alors mettre 🔺 0.5)
                                             f"\n\n**{elo_comparator}**\n"
                                             f"\n\n**{winrate_comparator}**\n", inline=True)
 
