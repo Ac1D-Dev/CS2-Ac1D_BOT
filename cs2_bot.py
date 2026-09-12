@@ -5,6 +5,7 @@ import embeds
 import faceit_command
 import ping_command
 import compare_command
+import setnick_command
 
 # Imports spécifiques
 from discord.ext import commands
@@ -24,6 +25,7 @@ bot = commands.Bot(command_prefix= "!", intents=intents)
 ping_command.setup(bot)
 compare_command.setup(bot, FACEIT_KEY)
 faceit_command.setup(bot, FACEIT_KEY)
+setnick_command.setup(bot, FACEIT_KEY)
 
 @bot.event
 async def on_ready():
@@ -40,5 +42,5 @@ async def on_app_command_error(interaction, error):
         await interaction.response.send_message(embed=embed, ephemeral=True)
     else:
         print(error)
-        
+
 bot.run(TOKEN)
