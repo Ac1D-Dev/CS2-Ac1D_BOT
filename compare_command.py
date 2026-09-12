@@ -8,6 +8,10 @@ import embeds
 def setup(bot, FACEIT_KEY):
 
     @bot.tree.command(name="compare", description="Compare 2 players FaceIt stats")
+    @discord.app_commands.describe(pseudo_1= "First Player")
+    @discord.app_commands.rename(pseudo_1= "account_name_1")
+    @discord.app_commands.describe(pseudo_2= "Second Player")
+    @discord.app_commands.rename(pseudo_2= "account_name_2")
 
     async def compare(interaction : discord.Interaction, pseudo_1: str, pseudo_2: str):
 
