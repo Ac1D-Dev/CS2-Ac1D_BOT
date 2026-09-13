@@ -4,6 +4,7 @@
 
 import discord
 import datetime
+import core.commands_info as commands_info
 
 
 from core.utils import color_per_level
@@ -151,4 +152,23 @@ def compare_embed(stats1, stats2):
     embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {stats1['ms']} ms")
     embed.timestamp = datetime.datetime.now()
 
+    return embed
+
+
+##############################
+#    menu déroulant /menu    #
+##############################
+
+def menu_embed(ms):
+    description="** CS2 BOT Tracker - Command List**\n\n"
+
+    for category, commands_list in commands_info.COMMANDS.items():
+        description += f"**{category}**\n"
+        for command in commands_list:
+            description += f"`{command['name']}` - {command['description']}\n"
+        description += "\n"
+
+    embed = discord.Embed(title=f"\n** - Menu - **", description=description ,color= color_per_level[8])
+    embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {ms} ms")
+    embed.timestamp = datetime.datetime.now()
     return embed
