@@ -159,6 +159,15 @@ def compare_embed(stats1, stats2):
 #    menu déroulant /menu    #
 ##############################
 
+def command_detail_embed(command, ms):
+    embed = discord.Embed(title=command["name"], description=f"{command['usage']}\n" + f" {command['details']}" , color= color_per_level[8])
+
+    embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {ms} ms")
+    embed.timestamp = datetime.datetime.now()
+    return embed
+
+    
+
 def menu_embed(ms):
     description="** CS2 BOT Tracker - Command List**\n\n"
 

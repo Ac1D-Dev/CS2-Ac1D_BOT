@@ -14,15 +14,17 @@ class ViewMenu(discord.ui.View):
         super().__init__()
 
     @discord.ui.select(
-        placeholder="Choose a category",
-        options=[discord.SelectOption(label=category) for category in commands_info.COMMANDS])
+        placeholder="Choose a command",
+        options= commands_info.option_objects
+        )
 
     async def menu_select(self, interaction: discord.Interaction, select: discord.ui.Select):
-        select_category = select.values[0]
-        embed = discord.Embed(title=select_category)
+        latency = interaction.client.latency * 1000
+        ms = round(latency, 2)
 
-        for command in commands_info.COMMANDS[select_category]:
-            embed.add_field(name=command["name"], value=command["description"], inline=False)
+        command = commands_info.get_command(select.values[0])
+        embed = embeds.command_detail_embed(command, ms)
+
 
         await interaction.response.edit_message(embed=embed)
 
