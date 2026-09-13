@@ -5,7 +5,40 @@ import core.utils as utils
 import core.nicknames as nicknames
 
 
-
+async def get_faceit_pseudo(member_1, pseudo_1, interaction):
+    if member_1 is not None:
+        faceit_id = str(member_1.id)
+        data = nicknames.load_data(nicknames.NICKNAME_FILE)
+    
+        if faceit_id in data:
+            return data[faceit_id]
+        else:
+            embed = discord.Embed(  title="❌ Account Not Linked",
+                                    description=f"You don't have a FaceIt account linked."
+                                                " Use `/setnick` to link one,"
+                                                " or type a nickname directly.",
+                                    color=utils.color_per_level[1])
+            await interaction.response.send_message(embed=embed)
+            return None
+    
+    elif pseudo_1 is not None:
+        return pseudo_1
+    
+    else:
+        discord_id = str(interaction.user.id)
+        data = nicknames.load_data(nicknames.NICKNAME_FILE)
+    
+        if discord_id in data:
+            member_1 = data[discord_id]
+            return member_1
+        else:
+            embed = discord.Embed(  title="❌ Account Not Linked",
+                                    description=f"You don't have a FaceIt account linked."
+                                                " Use `/setnick` to link one,"
+                                                " or type a nickname directly.",
+                                    color=utils.color_per_level[1])
+            await interaction.response.send_message(embed=embed)
+            return None
 
 def setup(bot, FACEIT_KEY):
 
@@ -24,76 +57,16 @@ def setup(bot, FACEIT_KEY):
 
     async def compare(interaction : discord.Interaction,pseudo_1: str = None, pseudo_2: str = None, member_1: discord.Member = None, member_2: discord.Member = None):
 
-        if member_1 is not None:
-            faceit_id = str(member_1.id)
-            data = nicknames.load_data(nicknames.NICKNAME_FILE)
+        player_1_pseudo = await get_faceit_pseudo(member_1, pseudo_1, interaction)
+        if player_1_pseudo is None:
+            return
 
-            if faceit_id in data:
-                member_1 = data[faceit_id]
-            else:
-                embed = discord.Embed(  title="❌ Account Not Linked",
-                                        description=f"{member_1} doesn't have a FaceIt account linked."
-                                                    " Use `/setnick` to link one,"
-                                                    " or type a nickname directly.",
-                                        color=utils.color_per_level[1])
-                await interaction.response.send_message(embed=embed)
-                return
-
-        elif pseudo_1 is not None:
-            member_1 = pseudo_1
-
-        else:
-            discord_id = str(interaction.user.id)
-            data = nicknames.load_data(nicknames.NICKNAME_FILE)
-
-            if discord_id in data:
-                member_1 = data[discord_id]
-            else:
-                embed = discord.Embed(  title="❌ Account Not Linked",
-                                        description=f"You don't have a FaceIt account linked."
-                                                    " Use `/setnick` to link one,"
-                                                    " or type a nickname directly.",
-                                        color=utils.color_per_level[1])
-                await interaction.response.send_message(embed=embed)
-                return
-
-        if member_2 is not None:
-            faceit_id = str(member_2.id)
-            data = nicknames.load_data(nicknames.NICKNAME_FILE)
-
-            if faceit_id in data:
-                member_2 = data[faceit_id]
-            else:
-                embed = discord.Embed(  title="❌ Account Not Linked",
-                                        description=f"{member_2} doesn't have a FaceIt account linked."
-                                                    " Use `/setnick` to link one,"
-                                                    " or type a nickname directly.",
-                                        color=utils.color_per_level[1])
-                await interaction.response.send_message(embed=embed)
-                return
+        player_2_pseudo = await get_faceit_pseudo(member_2, pseudo_2, interaction)
+        if player_2_pseudo is None:
+            return
 
 
-        elif pseudo_2 is not None:
-            member_2 = pseudo_2
-
-        else:
-            discord_id = str(interaction.user.id)
-            data = nicknames.load_data(nicknames.NICKNAME_FILE)
-
-            if discord_id in data:
-                member_2 = data[discord_id]
-            else:
-                embed = discord.Embed(  title="❌ Account Not Linked",
-                                        description=f"You don't have a FaceIt account linked."
-                                                    " Use `/setnick` to link one,"
-                                                    " or type a nickname directly.",
-                                        color=utils.color_per_level[1])
-                await interaction.response.send_message(embed=embed)
-                return  
-
-
-
-        if member_1 == member_2:
+        if player_1_pseudo == player_2_pseudo:
             embed = discord.Embed(title=" - Invalid Comparison - ")
 
             embed.add_field(name="Error : ", value="** Invalid Comparison due to Same Account Name **")
@@ -101,11 +74,11 @@ def setup(bot, FACEIT_KEY):
             await interaction.response.send_message(embed=embed)
             return
 
-        stats1 = await faceit_api.faceit_key(bot, member_1, FACEIT_KEY, interaction)
+        stats1 = await faceit_api.faceit_key(bot, player_1_pseudo, FACEIT_KEY, interaction)
         if not isinstance(stats1, dict):
             return  
         
-        stats2 = await faceit_api.faceit_key(bot, member_2, FACEIT_KEY, interaction)
+        stats2 = await faceit_api.faceit_key(bot, player_2_pseudo, FACEIT_KEY, interaction)
         if not isinstance(stats2, dict):
             return
         
