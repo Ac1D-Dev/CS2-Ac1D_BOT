@@ -6,7 +6,7 @@ import discord
 import datetime
 
 
-from utils import color_per_level
+from core.utils import color_per_level
 
 
 

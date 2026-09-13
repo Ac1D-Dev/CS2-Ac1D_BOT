@@ -1,9 +1,9 @@
 
 import discord
-import faceit_api
-import nicknames
-import utils
-import views
+import services.faceit_api as faceit_api
+import core.nicknames as nicknames
+import core.utils as utils
+import ui.views as views
 
 
 def setup(bot, FACEIT_KEY):

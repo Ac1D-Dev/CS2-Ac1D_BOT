@@ -1,8 +1,8 @@
 import discord 
-import embeds
-import nicknames
-import faceit_api
-import utils
+import ui.embeds as embeds
+import core.nicknames as nicknames
+import services.faceit_api as faceit_api
+import core.utils as utils
 
 class ViewStats(discord.ui.View):
     def __init__(self, stats):

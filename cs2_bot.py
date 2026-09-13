@@ -1,11 +1,11 @@
 # Imports
 import os
 import discord
-import embeds
-import faceit_command
-import ping_command
-import compare_command
-import setnick_command
+import ui.embeds as embeds
+import commands.faceit_command as faceit_command
+import commands.ping_command as ping_command
+import commands.compare_command as compare_command
+import commands.setnick_command as setnick_command
 
 # Imports spécifiques
 from discord.ext import commands

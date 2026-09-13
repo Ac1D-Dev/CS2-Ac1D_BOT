@@ -1,7 +1,7 @@
 import discord
 import requests
-import errors
-import utils
+import core.errors as errors
+import core.utils as utils
 
 async def faceit_key(bot, pseudo, FACEIT_KEY, interaction):
 

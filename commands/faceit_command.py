@@ -1,10 +1,10 @@
 import requests
 import discord
-import utils
-import embeds
-import views
-import faceit_api
-import nicknames
+import core.utils as utils
+import ui.embeds as embeds
+import ui.views as views
+import services.faceit_api as faceit_api
+import core.nicknames as nicknames
 
 def setup(bot, FACEIT_KEY):
 

@@ -1,6 +1,6 @@
 import discord
 import datetime
-import utils
+import core.utils as utils
 
 def setup(bot):
 

@@ -1,6 +1,6 @@
 import discord 
 
-from utils import color_per_level
+from core.utils import color_per_level
 
 async def handle_error_status(response, pseudo, interaction):
     if response.status_code == 401:
