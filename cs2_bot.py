@@ -5,7 +5,7 @@ import ui.embeds as embeds
 import commands.faceit_command as faceit_command
 import commands.ping_command as ping_command
 import commands.compare_command as compare_command
-import commands.setnick_command as setnick_command
+import commands.link_command as link_command
 import commands.menu_command as menu_command
 
 # Imports spécifiques
@@ -27,7 +27,7 @@ ping_command.setup(bot)
 menu_command.setup(bot)
 compare_command.setup(bot, FACEIT_KEY)
 faceit_command.setup(bot, FACEIT_KEY)
-setnick_command.setup(bot, FACEIT_KEY)
+link_command.setup(bot, FACEIT_KEY)
 
 @bot.event
 async def on_ready():

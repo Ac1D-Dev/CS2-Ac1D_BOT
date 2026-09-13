@@ -7,9 +7,9 @@ import ui.views as views
 
 
 def setup(bot, FACEIT_KEY):
-    @bot.tree.command(name="setnick", description="Link a discord account to FaceIt Nickname")
+    @bot.tree.command(name="link", description="Link a discord account to FaceIt Nickname")
 
-    async def setnick( interaction: discord.Interaction, pseudo: str):
+    async def link( interaction: discord.Interaction, pseudo: str):
         pseudo_faceit = await faceit_api.faceit_key(bot, pseudo, FACEIT_KEY, interaction)
 
         if not isinstance(pseudo_faceit, dict):
@@ -19,7 +19,7 @@ def setup(bot, FACEIT_KEY):
         embed = discord.Embed(title= "🔗 Link FaceIt Account", description=f"Tu es sur le point de lier ton compte à {pseudo_faceit['pseudo']}, confirmer ?" , color= utils.color_per_level[pseudo_faceit['level']])
         embed.set_author(name=pseudo_faceit["pseudo"], icon_url=pseudo_faceit["avatar"])
         embed.add_field(name=f"** Discord User Account **", value=f"** \n {interaction.user} **", inline=True)
-        embed.add_field(name="FaceIt Account",value=f"\n {pseudo_faceit['pseudo']} \n"
+        embed.add_field(name="FaceIt Account",value=f"\n\n {pseudo_faceit['pseudo']} \n"
                                                     f"\n🎖️ Level : {pseudo_faceit['level']} \n"
                                                     f"\n📈 Elo : {pseudo_faceit['elo']} ",inline=True)
         

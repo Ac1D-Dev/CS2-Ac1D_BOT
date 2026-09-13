@@ -15,7 +15,7 @@ async def get_faceit_pseudo(member_1, pseudo_1, interaction):
         else:
             embed = discord.Embed(  title="❌ Account Not Linked",
                                     description=f"You don't have a FaceIt account linked."
-                                                " Use `/setnick` to link one,"
+                                                " Use `/link` to link one,"
                                                 " or type a nickname directly.",
                                     color=utils.color_per_level[1])
             await interaction.response.send_message(embed=embed)
@@ -34,7 +34,7 @@ async def get_faceit_pseudo(member_1, pseudo_1, interaction):
         else:
             embed = discord.Embed(  title="❌ Account Not Linked",
                                     description=f"You don't have a FaceIt account linked."
-                                                " Use `/setnick` to link one,"
+                                                " Use `/link` to link one,"
                                                 " or type a nickname directly.",
                                     color=utils.color_per_level[1])
             await interaction.response.send_message(embed=embed)

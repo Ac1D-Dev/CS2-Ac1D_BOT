@@ -24,8 +24,8 @@ COMMANDS = {
                             "You can mention linked Discord accounts or type FaceIt nicknames directly."},
     ],
     "Social": [
-        {"name": "/setnick", "description": "🔗 Link your Discord account to your FaceIt nickname",
-                                "usage": "/setnick faceit_pseudo",
+        {"name": "/link", "description": "🔗 Link your Discord account to your FaceIt nickname",
+                                "usage": "/link faceit_pseudo",
                                 "details": "Link your Discord account to FaceIt Nickname, to simplify other commands. \n"
                                 "You can mention linked Discord accounts or type FaceIt nicknames directly."},
         {"name": "/leaderboard", "description": "🏆 Rank server members by FaceIt Elo or level",
