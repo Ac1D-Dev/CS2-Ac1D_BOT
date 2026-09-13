@@ -4,11 +4,6 @@ import core.nicknames as nicknames
 import core.utils as utils
 import core.commands_info as commands_info
 
-
-
-
-
-
 class ViewMenu(discord.ui.View):
     def __init__(self):
         super().__init__()
@@ -66,12 +61,6 @@ class ViewStats(discord.ui.View):
             embed = embeds.competitive_embed(self.stats)
         await interaction.response.edit_message(embed=embed)
 
-
-
-
-
-
-
 class ViewProfile(discord.ui.View):
     def __init__(self, pseudo_faceit):
         super().__init__()
@@ -87,8 +76,11 @@ class ViewProfile(discord.ui.View):
         data[discord_id] = self.pseudo_faceit['pseudo']
         nicknames.save_data(nicknames.NICKNAME_FILE, data)
 
-        embed = discord.Embed(title= "** - Confirmed - **", color= utils.color_per_level[4])
-        embed.add_field(name=f"** Discord User Account -> {interaction.user} <- Linked to : **", value=f"** {self.pseudo_faceit['pseudo']} **", inline=True)
+        embed = discord.Embed(title= "** - Confirmed - **", color= utils.color_per_level[self.pseudo_faceit['level']])
+        embed.add_field(name=f"** Discord User Account **", value=f"** \n {interaction.user} **", inline=True)
+        embed.add_field(name="FaceIt Account",value=f"\n {self.pseudo_faceit['pseudo']} \n"
+                                                    f"\n🎖️ Level : {self.pseudo_faceit['level']} \n"
+                                                    f"\n📈 Elo : {self.pseudo_faceit['elo']} ",inline=True)
         
         await interaction.response.edit_message(embed=embed, view=None)
 

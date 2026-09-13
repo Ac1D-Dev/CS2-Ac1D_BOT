@@ -15,8 +15,9 @@ def setup(bot, FACEIT_KEY):
         if not isinstance(pseudo_faceit, dict):
             return 
 
-        embed = discord.Embed(title= "setnick", color= utils.color_per_level[4])
-        embed.add_field(name=f"Tu es sur le point de lier ton compte à {pseudo_faceit['pseudo']}, confirmer ?", value="", inline=True)
+        
+        embed = discord.Embed(title= "🔗 Link FaceIt Account", description=f"Tu es sur le point de lier ton compte à {pseudo_faceit['pseudo']}, confirmer ?" , color= utils.color_per_level[pseudo_faceit['level']])
+        embed.set_author(name=pseudo_faceit["pseudo"], icon_url=pseudo_faceit["avatar"])
         
         profile_view = views.ViewProfile(pseudo_faceit= pseudo_faceit)
         await interaction.response.send_message(embed=embed, view=profile_view)
