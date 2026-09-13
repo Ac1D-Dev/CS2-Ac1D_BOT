@@ -19,8 +19,11 @@ def setup(bot, FACEIT_KEY):
                 discord_id = str(interaction.user.id)
 
                 if discord_id not in data:
-                    embed= discord.Embed(title="- No Account Linked -", color=utils.color_per_level[1])
-                    embed.add_field(name="You need to enter a nickname or use /setnick first.",value= "", inline=True)
+                    embed =discord.Embed(title="❌ Account Not Linked",
+                                        description="You don't have a FaceIt account linked."
+                                                    " Use `/setnick` to link one,"
+                                                    " or type a nickname directly.",
+                                        color=utils.color_per_level[1])
                     await interaction.response.send_message(embed=embed)
                     return  
                 pseudo = data[discord_id]
