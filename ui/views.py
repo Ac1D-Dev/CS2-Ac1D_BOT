@@ -76,7 +76,8 @@ class ViewProfile(discord.ui.View):
         data[discord_id] = self.pseudo_faceit['pseudo']
         nicknames.save_data(nicknames.NICKNAME_FILE, data)
 
-        embed = discord.Embed(title= "** - Confirmed - **",description="Account Linked", color= utils.color_per_level[self.pseudo_faceit['level']])
+        embed = discord.Embed(title= "** - Confirmed - **", color= utils.color_per_level[self.pseudo_faceit['level']])
+        embed.set_thumbnail(url=self.pseudo_faceit["avatar"])
         embed.add_field(name=f"** Discord User Account **", value=f"** \n {interaction.user.display_name} **", inline=True)
         embed.add_field(name="** Successfully **", value="** LINKED **", inline=True)
         embed.add_field(name="FaceIt Account",value=f"\n {self.pseudo_faceit['pseudo']} \n"
