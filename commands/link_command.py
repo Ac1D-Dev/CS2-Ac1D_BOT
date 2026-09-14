@@ -16,7 +16,7 @@ def setup(bot, FACEIT_KEY):
             return 
 
         
-        embed = discord.Embed(title= "🔗 Link FaceIt Account", description=f"Tu es sur le point de lier ton compte à {pseudo_faceit['pseudo']}, confirmer ?" , color= utils.color_per_level[pseudo_faceit['level']])
+        embed = discord.Embed(title= "🔗 Link FaceIt Account", description=f"You are about to link your account to {pseudo_faceit['pseudo']}, confirm ?" , color= utils.color_per_level[pseudo_faceit['level']])
         embed.set_thumbnail(url=pseudo_faceit["avatar"])
         embed.add_field(name=f"** Discord User Account **", value=f"** \n {interaction.user.display_name} **", inline=True)
         embed.add_field(name="FaceIt Account",value=f"\n\n {pseudo_faceit['pseudo']} \n"
