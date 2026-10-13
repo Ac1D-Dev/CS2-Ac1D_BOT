@@ -181,3 +181,11 @@ def menu_embed(ms):
     embed.set_footer(text= f"Ac1D - TrackerBot | CS2 |  ~ {ms} ms")
     embed.timestamp = datetime.datetime.now()
     return embed
+
+def not_linked():
+    embed = discord.Embed(title="❌ Account Not Linked",
+        description="You don't have a FaceIt account linked."
+        " Use `/link` to link one,"
+        " or type a nickname directly.",
+        color=color_per_level[1])
+    return embed
