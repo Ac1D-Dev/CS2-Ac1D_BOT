@@ -1,12 +1,14 @@
 # Cs2 Bot Tracker
 
-A Discord bot that displays a player's **FACEIT** stats for **Counter-Strike 2** directly in Discord, with an interactive dropdown to switch between different stat presets.
+A Discord bot that displays a player's **FACEIT** stats for **Counter-Strike 2** directly in Discord, with interactive dropdowns to switch between stat presets and browse available commands.
 
 ## Features
 
 - `/faceit [pseudo]` — fetches a player's FACEIT profile and CS2 lifetime stats, then displays them in a color-coded embed (color changes with the player's FACEIT skill level). Omit `pseudo` to use your own linked account (see `/link`).
 - `/link <pseudo>` — links your Discord account to a FACEIT nickname, with a Confirm/Deny step before saving. Once linked, `/faceit` and `/compare` can use it automatically.
+- `/unlink` — removes the FACEIT nickname linked to your Discord account.
 - `/compare` — compares two players' FACEIT stats side by side. For each player, either mention a Discord member (`member_1`/`member_2`) whose account is linked, or type a FACEIT nickname directly (`pseudo_1`/`pseudo_2`); if neither is given, defaults to your own linked account.
+- `/menu` — browse all available commands in one place, with a dropdown to see detailed usage for each.
 - Interactive preset dropdown under the `/faceit` embed to switch the view without re-running the command:
   - **Default** — full overview (level, elo, matches, K/D, headshot %, ADR, win streaks, win rate...)
   - **Global** — level, elo, matches, wins, win rate
@@ -26,24 +28,28 @@ A Discord bot that displays a player's **FACEIT** stats for **Counter-Strike 2**
 ## Project structure
 
 ```
-cs2_bot.py              # entry point: bot setup, command registration
+cs2_bot.py                 # entry point: bot setup, command registration
 
 commands/
-    faceit_command.py    # /faceit
-    compare_command.py   # /compare
-    link_command.py       # /link
-    ping_command.py      # /ping
+    faceit_command.py      # /faceit
+    compare_command.py     # /compare
+    link_command.py        # /link
+    unlink_command.py      # /unlink
+    menu_command.py        # /menu
+    ping_command.py        # /ping
 
 ui/
-    embeds.py            # builds embeds for stat presets, comparisons, and errors
-    views.py             # dropdown UI for /faceit presets + confirm/deny buttons for /link
+    embeds.py              # builds embeds for stat presets, comparisons, menu and errors
+    views.py               # dropdown UI for /faceit presets, /menu commands, and confirm/deny buttons for /link
 
 services/
-    faceit_api.py        # FACEIT API calls
+    faceit_api.py          # FACEIT API calls
 
 core/
-    nicknames.py         # JSON persistence linking a Discord ID to a FACEIT pseudo
-    utils.py              # shared constants (embed color per FACEIT level)
+    nicknames.py           # JSON persistence linking a Discord ID to a FACEIT pseudo
+    player_resolver.py     # resolves a player's FACEIT pseudo from a mention, a typed pseudo, or the caller's linked account
+    commands_info.py       # command metadata (name, description, usage, details) used to build /menu
+    utils.py               # shared constants (embed color per FACEIT level)
     errors.py              # maps FACEIT API error status codes to Discord messages
 ```
 
@@ -69,9 +75,10 @@ core/
 
 ## Roadmap
 
+- Non-competitive stats commands: `/history` (recent matches), `/session` (current session tracking), `/maps` (win rate per map), `/leaderboard` (server ranking by Elo/level), `/profile` (check a member's linked FACEIT account), `/veto` (map ban/pick for scrims).
 - CS2 Premier mode stats via the Leetify API (no official Valve API exists for Premier rating).
-- Tracking pro CS2 matches/teams, with notifications posted to a configurable channel.
+- Tracking pro CS2 matches/teams (`/matches`, `/team`), with notifications posted to a configurable channel (`/setchannelmatches`).
 
 ## Author
 
-Built by **Ac1D** as a personal project to learn Python and Discord bot development.
+Built by **Ac1D**.
