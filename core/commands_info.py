@@ -28,6 +28,9 @@ COMMANDS = {
                                 "usage": "/link faceit_pseudo",
                                 "details": "Link your Discord account to FaceIt Nickname, to simplify other commands. \n"
                                 "You can mention linked Discord accounts or type FaceIt nicknames directly."},
+        {"name": "/unlink", "description": "⛓️‍💥​ Unlink your Discord account from your FaceIt nickname",
+                                "usage": "/unlink",
+                                "details": "Unlink your Discord account from FaceIt Nickname\n"},
         {"name": "/leaderboard", "description": "🏆 Rank server members by FaceIt Elo or level",
                                 "usage": "/leaderboard",
                                 "details": " Show Leaderboard by FaceIt Elo or Level for linked player"},

@@ -14,3 +14,8 @@ def load_data(nickname_path):
 def save_data(nickname_path, data):
     with open(nickname_path, "w") as nicknames:
         json.dump(data, nicknames)
+
+def del_data(nickname_path, del_key):
+    data = load_data(nickname_path)
+    data.pop(del_key, None)
+    save_data(nickname_path, data)
