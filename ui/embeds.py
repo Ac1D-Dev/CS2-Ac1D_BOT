@@ -185,13 +185,13 @@ def menu_embed(ms):
 def succ_del():
     embed = discord.Embed(title="✔️​ Account Unlinked ✔️​",
         description="Your account has been successfully unlinked."
-        " Use `/link` to link one,",
+        " Use `/link` to link your FaceIt Account",
         color= color_per_level[3])
     return embed
 
 def not_linked():
     embed = discord.Embed(title="❌ Account Not Linked",
         description="You don't have a FaceIt account linked."
-        " Use `/link` to link one,",
+        " Use `/link` to link your FaceIt Account",
         color= color_per_level[10])
     return embed
